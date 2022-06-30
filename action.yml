@@ -1,6 +1,5 @@
 name: "Hello-world-github-action-solution"
-description: "Say hello to everyone.
-"
+description: "Say hello to everyone."
 inputs: 
   who-to-greet: 
     description: "Who to greet"
