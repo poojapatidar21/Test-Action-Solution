@@ -8,7 +8,7 @@ inputs:
     default: 'World'
 outputs:
   time:
-    discription: 'time I greeted you'
+    description: 'time I greeted you'
 
 runs:
   using: 'node16'
