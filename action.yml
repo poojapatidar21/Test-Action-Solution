@@ -1,0 +1,15 @@
+name: "Hello-world-github-action-solution"
+description: "Say hello to everyone.
+"
+inputs: 
+  who-to-greet: 
+    description: "Who to greet"
+    required: true
+    default: 'World'
+outputs:
+  time:
+    discription: 'time I greeted you'
+
+runs:
+  using: 'node16'
+  main: 'index.js'
