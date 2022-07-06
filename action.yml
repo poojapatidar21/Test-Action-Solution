@@ -10,11 +10,6 @@ inputs:
     required: true
     default: ""
 
-outputs:
-  time:
-    description: 'time I greeted you'
-    
-
 runs:
   using: 'node16'
   main: 'dist/index.js'
