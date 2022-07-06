@@ -1,10 +1,15 @@
 name: "Hello-world-github-action-solution"
 description: "Say hello to everyone."
 inputs: 
-  who-to-greet: 
+  who-to-greet:
     description: "Who to greet"
     required: true
     default: 'World'
+  ConnectedServiceName:
+    description: "Input Service connection to authenticate to azure key vault for fetching gateway auth & signing cert."
+    required: true
+    default: ""
+
 outputs:
   time:
     description: 'time I greeted you'
