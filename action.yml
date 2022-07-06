@@ -1,5 +1,5 @@
-name: "Hello-world-github-action-solution"
-description: "Say hello to everyone."
+name: "Test Action-Solution"
+description: "test repo for pooja."
 inputs: 
   who-to-greet:
     description: "Who to greet"
