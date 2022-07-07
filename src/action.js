@@ -18,6 +18,8 @@ const ConnectedServiceName = core_1.default.getInput('ConnectedServiceName');
 function run(ConnectedServiceName) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
+            const ConnectedServic = core_1.default.getInput('ConnectedServiceName');
+            console.log(ConnectedServic);
             if (ConnectedServiceName == '72f988bf-86f1-41af-91ab-2d7cd011db47') {
                 console.log("Valid ConnecterServiceName");
             }
