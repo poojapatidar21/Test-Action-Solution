@@ -1,9 +1,9 @@
 import core from "@actions/core"
-const ConnectedServiceName:string = core.getInput('ConnectedServiceName')
-export async function run(ConnectedServiceName:string) {
+
+export async function run() {
     try{
-        const ConnectedServic:string = core.getInput('ConnectedServiceName')
-        console.log(ConnectedServic)
+        const ConnectedServiceName:string = core.getInput('ConnectedServiceName')
+        console.log(ConnectedServiceName)
         if (ConnectedServiceName == '72f988bf-86f1-41af-91ab-2d7cd011db47' ){
             console.log("Valid ConnecterServiceName")
         }
@@ -17,3 +17,4 @@ export async function run(ConnectedServiceName:string) {
     }
     
 }
+run()
