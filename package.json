@@ -20,6 +20,13 @@
   "dependencies": {
     "@actions/core": "^1.9.0",
     "@actions/github": "^5.0.3",
-    "@vercel/ncc": "^0.34.0"
+    "@vercel/ncc": "^0.34.0",
+    "bluebird": "^3.7.2",
+    "http": "^0.0.1-security",
+    "request": "^2.88.2"
+  },
+  "devDependencies": {
+    "@types/bluebird": "^3.5.36",
+    "@types/request": "^2.48.8"
   }
 }
