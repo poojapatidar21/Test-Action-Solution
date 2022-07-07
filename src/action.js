@@ -8,16 +8,12 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.run = void 0;
-const core_1 = __importDefault(require("@actions/core"));
 function run() {
     return __awaiter(this, void 0, void 0, function* () {
         try {
-            const ConnectedServiceName = core_1.default.getInput('ConnectedServiceName');
+            const ConnectedServiceName = '72f988bf-86f1-41af-91ab-2d7cd011db47';
             if (ConnectedServiceName == 'bad' || ConnectedServiceName == undefined) {
                 console.log("Invalid ConnecterServiceName");
                 throw new Error("Invalid ConnecterServiceName for" + ConnectedServiceName);
