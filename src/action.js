@@ -19,10 +19,15 @@ function run() {
         try {
             const ConnectedServiceName = core_1.default.getInput('ConnectedServiceName');
             console.log(ConnectedServiceName);
+            if (ConnectedServiceName === '72f988bf-86f1-41af-91ab-2d7cd011db47') {
+                console.log("Valid ConnecterServiceName");
+            }
+            else {
+                console.log("Invalid ConnecterServiceName" + ConnectedServiceName);
+            }
         }
         catch (error) {
-            if (error instanceof Error)
-                core_1.default.setFailed(error.message);
+            console.log(error);
         }
     });
 }
