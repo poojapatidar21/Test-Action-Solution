@@ -12,8 +12,8 @@ jobs:
     timeout-minutes: 2
 
     env:
-      AUTH_CLIENT: {{secrets.AUTH_CLIENT}}
-      AUTH_SECRET: {{secrets.AUTH_SECRET}}
+      AUTH_CLIENT: ${{secrets.AUTH_CLIENT}}
+      AUTH_SECRET: ${{secrets.AUTH_SECRET}}
 
     steps:
     - uses: actions/checkout@v3
