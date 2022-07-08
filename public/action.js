@@ -34,17 +34,19 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.run = void 0;
 const core = __importStar(require("@actions/core"));
+const configManager_1 = require("./configManager");
 function run() {
     return __awaiter(this, void 0, void 0, function* () {
         try {
             const ConnectedServiceName = core.getInput('ConnectedServiceName');
             console.log(ConnectedServiceName);
-            if (ConnectedServiceName === '72f988bf-86f1-41af-91ab-2d7cd011db47') {
-                console.log("Valid ConnecterServiceName");
-            }
-            else {
-                console.log("Invalid ConnecterServiceName" + ConnectedServiceName);
-            }
+            var configManager = new configManager_1.ConfigManager();
+            yield configManager.PopulateConfiguration().then(() => {
+                console.log("Config Values Populated successfully.\n");
+            }).catch((error) => {
+                console.log("Creation of the configManager.config instance failed. \n");
+                throw error;
+            });
         }
         catch (error) {
             console.log(error);

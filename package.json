@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "ncc build src/action.js -o dist",
+    "build": "ncc build public/action.js -o dist",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -23,10 +23,12 @@
     "@vercel/ncc": "^0.34.0",
     "bluebird": "^3.7.2",
     "http": "^0.0.1-security",
-    "request": "^2.88.2"
+    "request": "^2.88.2",
+    "uuid": "^8.3.2"
   },
   "devDependencies": {
     "@types/bluebird": "^3.5.36",
-    "@types/request": "^2.48.8"
+    "@types/request": "^2.48.8",
+    "@types/uuid": "^8.3.4"
   }
 }

@@ -1,17 +1,18 @@
 import * as core from "@actions/core"
+import { ConfigManager } from "./configManager"
 
 export async function run() {
     try{
         const ConnectedServiceName:string = core.getInput('ConnectedServiceName')
         console.log(ConnectedServiceName)
-        if (ConnectedServiceName === '72f988bf-86f1-41af-91ab-2d7cd011db47' ){
-            console.log("Valid ConnecterServiceName")
-        }
-        else{
-            console.log("Invalid ConnecterServiceName"+ConnectedServiceName)
-        }
-
-
+        
+        var configManager= new ConfigManager()
+        await configManager.PopulateConfiguration().then(()=>{
+            console.log("Config Values Populated successfully.\n")
+        }).catch((error:any)=>{
+        console.log("Creation of the configManager.config instance failed. \n")
+        throw error
+    })
     } catch(error){
         console.log(error)
     }
