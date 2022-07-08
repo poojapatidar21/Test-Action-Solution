@@ -60,16 +60,17 @@ export class ConfigManager{
     }
 
     private async SetCertificatesInfo(){
-        const authSecretCertificate:KeyVaultSecret=await keyVaultUtility.FetchCertFromSecretClient(this.config.KVIdentityConfig!, this.config.KVIdentityConfig!.AuthCertName!)
-        const authCertInfo = convertPFX(authSecretCertificate.value!)
-        const authCertificate:KeyVaultCertificateWithPolicy= await keyVaultUtility.FetchCertFromSecretClient(this.config.KVIdentityConfig! , this.config.KVIdentityConfig!.AuthCertName!)
+        const authSecretCertificate: KeyVaultSecret = await keyVaultUtility.FetchCertFromSecretClient(this.config.KVIdentityConfig!, this.config.KVIdentityConfig!.AuthCertName!);
+        const authCertInfo = convertPFX(authSecretCertificate.value!);
+        const authCertificate: KeyVaultCertificateWithPolicy = await keyVaultUtility.FetchCertFromCertificateClient(this.config.KVIdentityConfig!,this.config.KVIdentityConfig!.AuthCertName!);
+
+        var authCer = authCertificate.cer;
+        var encodedAuthThumbprint = authCertificate.properties.x509Thumbprint;
         
-        var authCer= authCertificate.cer
-        var encodedAuthThumbprint= authCertificate.properties.x509Thumbprint
-        
-        this.config.AuthCertThumbprint=Buffer.from(encodedAuthThumbprint!).toString("hex")
-        this.config.AuthPrivateKey=authCertInfo.key
-        this.config.AuthPublicCert=Buffer.from(authCer!).toString("base64")
+       this.config.AuthCertThumbprint = Buffer.from(encodedAuthThumbprint!).toString("hex");
+       this.config.AuthPublicCert = Buffer.from(authCer!).toString("base64");
+       this.config.AuthPrivateKey = authCertInfo.key;
+
         
         // const signSecretCertificate: KeyVaultSecret = await keyVaultUtility.FetchCertFromSecretClient(this.config.KVIdentityConfig!, this.config.KVIdentityConfig!.SignCertName!);
         // const signCertificate: KeyVaultCertificateWithPolicy = await keyVaultUtility.FetchCertFromCertificateClient(this.config.KVIdentityConfig!,this.config.KVIdentityConfig!.SignCertName!);
