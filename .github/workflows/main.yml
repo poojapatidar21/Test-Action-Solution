@@ -25,6 +25,6 @@ jobs:
       run: |
         tsc
       
-    - name: running jsfile
+    - name: Build 
       run: |
-        npm run submitRelease
+        npm run build
