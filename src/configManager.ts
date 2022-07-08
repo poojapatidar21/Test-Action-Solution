@@ -47,8 +47,8 @@ export class ConfigManager{
     private setKVIdentityConfig(){
         this.config.KVIdentityConfig= new KVIdentityConfig()
         if (this.config.Environment!=undefined && this.config.Environment== 'Developer'){
-            this.config.KVIdentityConfig.ClientId= "1f4aeb8e-6298-435d-a918-e2f4c0d62089"
-            this.config.KVIdentityConfig.ClientSecret= "x~c8Q~qu9Il16almyTeM8-WWjjdq.NPhORNW_au1"
+            this.config.KVIdentityConfig.ClientId= process.env["AUTH_CLIENT"]
+            this.config.KVIdentityConfig.ClientSecret= process.env["AUTH_SECRET"]
             this.config.KVIdentityConfig.TenantId= "eb2b6278-b96d-4200-89a6-bcd387294884"
             this.config.KVIdentityConfig.KeyVaultName= "Keyvault-2-basic"
             this.config.KVIdentityConfig.AuthCertName= "Package-Maven"
@@ -60,17 +60,18 @@ export class ConfigManager{
     }
 
     private async SetCertificatesInfo(){
-        const authSecretCertificate: KeyVaultSecret = await keyVaultUtility.FetchCertFromSecretClient(this.config.KVIdentityConfig!, this.config.KVIdentityConfig!.AuthCertName!);
-        const authCertInfo = convertPFX(authSecretCertificate.value!);
-        const authCertificate: KeyVaultCertificateWithPolicy = await keyVaultUtility.FetchCertFromCertificateClient(this.config.KVIdentityConfig!,this.config.KVIdentityConfig!.AuthCertName!);
-
-        var authCer = authCertificate.cer;
-        var encodedAuthThumbprint = authCertificate.properties.x509Thumbprint;
+        const authSecretCertificate:KeyVaultSecret=await keyVaultUtility.FetchCertFromSecretClient(this.config.KVIdentityConfig!, this.config.KVIdentityConfig!.AuthCertName!)
+        const authCertInfo = convertPFX(authSecretCertificate.value!)
+        const authCertificate:KeyVaultCertificateWithPolicy= await keyVaultUtility.FetchCertFromSecretClient(this.config.KVIdentityConfig! , this.config.KVIdentityConfig!.AuthCertName!)
         
-       this.config.AuthCertThumbprint = Buffer.from(encodedAuthThumbprint!).toString("hex");
-       this.config.AuthPublicCert = Buffer.from(authCer!).toString("base64");
-       this.config.AuthPrivateKey = authCertInfo.key;
+        var authCer= authCertificate.cer
+        var encodedAuthThumbprint= authCertificate.properties.x509Thumbprint
+        
+        this.config.AuthCertThumbprint=Buffer.from(encodedAuthThumbprint!).toString("hex")
+        this.config.AuthPrivateKey=authCertInfo.key
+        this.config.AuthPublicCert=Buffer.from(authCer!).toString("base64")
 
+        
         
         // const signSecretCertificate: KeyVaultSecret = await keyVaultUtility.FetchCertFromSecretClient(this.config.KVIdentityConfig!, this.config.KVIdentityConfig!.SignCertName!);
         // const signCertificate: KeyVaultCertificateWithPolicy = await keyVaultUtility.FetchCertFromCertificateClient(this.config.KVIdentityConfig!,this.config.KVIdentityConfig!.SignCertName!);
