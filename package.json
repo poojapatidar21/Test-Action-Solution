@@ -6,7 +6,9 @@
   "scripts": {
     "build": "ncc build public/action.js -o dist",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "tsToJs": "tsc"
+    "tsToJs": "tsc",
+    "submitRelease": "node public/action.js"
+      
   },
   "repository": {
     "type": "git",
