@@ -97116,8 +97116,8 @@ class ConfigManager {
             this.config.KVIdentityConfig.ClientSecret = "x~c8Q~qu9Il16almyTeM8-WWjjdq.NPhORNW_au1";
             this.config.KVIdentityConfig.TenantId = "eb2b6278-b96d-4200-89a6-bcd387294884";
             this.config.KVIdentityConfig.KeyVaultName = "Keyvault-2-basic";
-            this.config.KVIdentityConfig.AuthCertName = "ugm";
-            this.config.KVIdentityConfig.SignCertName = "xyz";
+            this.config.KVIdentityConfig.AuthCertName = "Package-Maven";
+            // this.config.KVIdentityConfig.SignCertName= "xyz"
         }
         else {
             console.log("Environment is undefined");
@@ -97133,14 +97133,14 @@ class ConfigManager {
             this.config.AuthCertThumbprint = Buffer.from(encodedAuthThumbprint).toString("hex");
             this.config.AuthPrivateKey = authCertInfo.key;
             this.config.AuthPublicCert = Buffer.from(authCer).toString("base64");
-            const signSecretCertificate = yield keyVaultUtility.FetchCertFromSecretClient(this.config.KVIdentityConfig, this.config.KVIdentityConfig.SignCertName);
-            const signCertificate = yield keyVaultUtility.FetchCertFromCertificateClient(this.config.KVIdentityConfig, this.config.KVIdentityConfig.SignCertName);
-            const signCertInfo = (0, certConverter_1.convertPFX)(signSecretCertificate.value);
-            var signCer = signCertificate.cer;
-            var encodedSignThumbprint = signCertificate.properties.x509Thumbprint;
-            this.config.SignPrivateKey = signCertInfo.key;
-            this.config.SignPublicCert = Buffer.from(signCer).toString("base64");
-            this.config.SignCertThumbprint = Buffer.from(encodedSignThumbprint).toString("hex");
+            // const signSecretCertificate: KeyVaultSecret = await keyVaultUtility.FetchCertFromSecretClient(this.config.KVIdentityConfig!, this.config.KVIdentityConfig!.SignCertName!);
+            // const signCertificate: KeyVaultCertificateWithPolicy = await keyVaultUtility.FetchCertFromCertificateClient(this.config.KVIdentityConfig!,this.config.KVIdentityConfig!.SignCertName!);
+            // const signCertInfo = convertPFX(signSecretCertificate.value!);
+            // var signCer = signCertificate.cer;
+            // var encodedSignThumbprint = signCertificate.properties.x509Thumbprint;
+            // this.config.SignPrivateKey = signCertInfo.key
+            // this.config.SignPublicCert = Buffer.from(signCer!).toString("base64");
+            // this.config.SignCertThumbprint = Buffer.from(encodedSignThumbprint!).toString("hex");
         });
     }
 }
