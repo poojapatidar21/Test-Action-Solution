@@ -1,12 +1,12 @@
 import { IKVIdentityConfig } from "./iKeyVaultIdentityConfig";
 
 export class KVIdentityConfig implements IKVIdentityConfig {
-    TenantId?: string;
-    ClientId?: string;
-    ClientSecret?: string;
-    KeyVaultName?: string;
-    AuthCertName?: string;
-    SignCertName?: string;
+    TenantId: string | undefined;
+    ClientId: string | undefined;
+    ClientSecret: string | undefined;
+    KeyVaultName: string | undefined;
+    AuthCertName: string | undefined;
+    SignCertName: string | undefined;
 
     constructor() {
         this.TenantId=undefined

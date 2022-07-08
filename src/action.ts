@@ -12,7 +12,9 @@ export async function run() {
         }).catch((error:any)=>{
         console.log("Creation of the configManager.config instance failed. \n")
         throw error
-    })
+        })
+    
+
     } catch(error){
         console.log(error)
     }

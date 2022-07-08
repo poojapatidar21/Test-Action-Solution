@@ -1,6 +1,6 @@
 export interface IKVIdentityConfig {
     
-    TenantId?: string;
+    TenantId?: string ;
     ClientId?: string;
     ClientSecret?: string;
     KeyVaultName?: string;
