@@ -1,0 +1,30 @@
+name: NodeJS with Typescript Compiler
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+  
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Use Node.js
+      uses: actions/setup-node@v3
+
+    - name: Install Packages
+      run: |
+        npm install
+
+    - name: tsc compile
+      run: |
+        tsc
+      
+    - name: running jsfile
+      run: |
+        npm run submitRelease
