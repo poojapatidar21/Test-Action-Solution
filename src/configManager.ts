@@ -6,6 +6,7 @@ import { KeyVaultSecret } from "@azure/keyvault-secrets";
 import { KeyVaultCertificateWithPolicy } from "@azure/keyvault-certificates";
 import { convertPFX } from "./certConverter";
 import * as keyVaultUtility from "./keyVaultUtility";
+import { ExceptionMessages } from "./exceptionMessages";
 
 
 export class ConfigManager{
@@ -18,7 +19,7 @@ export class ConfigManager{
         this.setConfigVariables()
         this.setKVIdentityConfig()
         await this.SetCertificatesInfo().catch((error) => {
-            console.log("Error while fetching Certs and populating Cert info :- \n")
+            console.log(ExceptionMessages.CertPopulatingError)
             throw error;
         });
     }

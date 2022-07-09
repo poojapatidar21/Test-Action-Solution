@@ -8,7 +8,6 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "tsToJs": "tsc",
     "submitRelease": "node public/action.js"
-      
   },
   "repository": {
     "type": "git",
@@ -26,6 +25,7 @@
     "@azure/identity": "^2.0.5",
     "@azure/keyvault-certificates": "^4.4.0",
     "@azure/keyvault-secrets": "^4.4.0",
+    "@azure/msal-node": "^1.11.0",
     "@azure/storage-blob": "^12.11.0",
     "@vercel/ncc": "^0.34.0",
     "bluebird": "^3.7.2",

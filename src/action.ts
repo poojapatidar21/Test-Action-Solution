@@ -1,5 +1,10 @@
 import * as core from "@actions/core"
+import http from 'http'
 import { ConfigManager } from "./configManager"
+import { ExceptionMessages } from "./exceptionMessages"
+import { GatewayCaller } from "./gaterwayCaller"
+import {MSEssGatewayClientContractsOperationResponse} from './api'
+import { Constant } from "./constants"
 
 export async function run() {
     try{
@@ -8,10 +13,27 @@ export async function run() {
         
         var configManager= new ConfigManager()
         await configManager.PopulateConfiguration().then(()=>{
-            console.log("Config Values Populated successfully.\n")
+            console.log(Constant.ConfigPopulatingSuccess)
         }).catch((error:any)=>{
-        console.log("Creation of the configManager.config instance failed. \n")
+        console.log(ExceptionMessages.ConfigCreationFailed)
         throw error
+        })
+
+        var gatewayCommunicator=new GatewayCaller(configManager.config!)
+        let operationId=''
+        await gatewayCommunicator.GatewayCalling().then((responseId:string)=>{
+            operationId=responseId
+        }).catch((error:any)=>{
+            console.log(ExceptionMessages.GatewayCallingExecutionFailed)
+            var finalError =new Error()
+            try{
+                let err=error as {response: http.IncomingMessage; body: MSEssGatewayClientContractsOperationResponse;}
+                finalError=new Error(err.response.statusCode+'--'+err.response.statusMessage)
+
+            }  catch(er){
+                throw error
+            }
+            throw finalError
         })
     
 
