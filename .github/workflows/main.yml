@@ -12,7 +12,7 @@ jobs:
     timeout-minutes: 2
 
     env:
-    AUTH_SECRET: ${{secrets.AUTH_SECRET}}
+      AUTH_SECRET: ${{secrets.AUTH_SECRET}}
 
     steps:
     - uses: actions/checkout@v3
