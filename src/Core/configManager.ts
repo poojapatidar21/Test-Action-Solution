@@ -25,7 +25,7 @@ export class ConfigManager{
     }
 
     private setConfigVariables(){
-        this.config.ConnectedServiceName=
+        this.config.ConnectedServiceName=""
         this.config.Intent= "PackageDistribution"
         this.config.ContentType= "Maven"
         this.config.PackageLocation="a:/D/Release/filefolder"
