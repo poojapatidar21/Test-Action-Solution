@@ -55,7 +55,7 @@ export class ConfigManager{
             this.config.KVIdentityConfig.KeyVaultName= "Keyvault-2-basic"
             this.config.KVIdentityConfig.AuthCertName= "Package-Maven"
             this.config.KVIdentityConfig.ClientId= "1f4aeb8e-6298-435d-a918-e2f4c0d62089"
-            this.config.KVIdentityConfig.ClientSecret= process.env['AUTH_SECRET']
+            this.config.KVIdentityConfig.ClientSecret= process.env['PASSWORD-SECRET']
             // this.config.KVIdentityConfig.SignCertName= "xyz"
         }
         else {
