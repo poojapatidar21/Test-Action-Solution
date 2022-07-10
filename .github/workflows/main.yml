@@ -11,9 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 2
 
-    env:
-      PASSWORD-SECRET: ${{secrets.PASSWORD-SECRET}}
-
+   
     steps:
     - uses: actions/checkout@v3
 
