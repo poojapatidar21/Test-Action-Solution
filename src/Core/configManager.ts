@@ -1,12 +1,12 @@
-import { IConfig } from "./iConfig";
-import { Config } from "./config";
-import { ConfigKeys } from "./configKeys";
-import { KVIdentityConfig } from "./keyVaultIndentityConfig";
+import { IConfig } from "../Common/iConfig";
+import { Config } from "../Common/config";
+import { ConfigKeys } from "../Common/configKeys";
+import { KVIdentityConfig } from "../Common/keyVaultIndentityConfig";
 import { KeyVaultSecret } from "@azure/keyvault-secrets";
 import { KeyVaultCertificateWithPolicy } from "@azure/keyvault-certificates";
-import { convertPFX } from "./certConverter";
-import * as keyVaultUtility from "./keyVaultUtility";
-import { ExceptionMessages } from "./exceptionMessages";
+import { convertPFX } from "../Common/certConverter";
+import * as keyVaultUtility from "../Common/keyVaultUtility";
+import { ExceptionMessages } from "../Common/exceptionMessages";
 
 
 export class ConfigManager{

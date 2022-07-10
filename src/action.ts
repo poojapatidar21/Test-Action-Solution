@@ -1,10 +1,10 @@
 import * as core from "@actions/core"
 import http from 'http'
-import { ConfigManager } from "./configManager"
-import { ExceptionMessages } from "./exceptionMessages"
-import { GatewayCaller } from "./gaterwayCaller"
-import {MSEssGatewayClientContractsOperationResponse} from './api'
-import { Constant } from "./constants"
+import { ConfigManager } from "./Core/configManager"
+import { ExceptionMessages } from "./Common/exceptionMessages"
+import { GatewayCaller } from "./Core/gaterwayCaller"
+import {MSEssGatewayClientContractsOperationResponse} from './Common/api'
+import { Constant } from "./Common/constants"
 
 export async function run() {
     try{

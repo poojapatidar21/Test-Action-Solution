@@ -1,9 +1,10 @@
-import * as GatewayClient from './api'
-import { AuthenticationManger } from "./authContextManager";
-import { Constant } from './constants';
-import { IAuthenticationManager } from "./iAuthContextManager";
-import { IConfig } from "./iConfig";
-import { IMessageCreator } from "./iMessageCreator";
+import * as GatewayClient from '../Common/api'
+import { AuthenticationManger } from "../Common/authContextManager";
+import { Constant } from '../Common/constants';
+import { IAuthenticationManager } from "../Common/iAuthContextManager";
+import { IConfig } from "../Common/iConfig";
+import { IMessageCreator } from "../Common/iMessageCreator";
+import { MessageCreator } from '../Common/messageCreator';
 
 export class GatewayCaller {
     config?: IConfig;
@@ -13,7 +14,7 @@ export class GatewayCaller {
     public constructor(_config:IConfig, _authContext?:IAuthenticationManager, _messageCreator?:IMessageCreator){
         this.config=_config
         this.authContext=_authContext?_authContext:new AuthenticationManger(this.config)
-        
+        this.messageCreator=_messageCreator?_messageCreator: new MessageCreator(this.config)
     }
     private async FillAccessToken(){
         if (this.authContext?.accessToken==undefined){
@@ -68,9 +69,6 @@ export class GatewayCaller {
         console.log(Constant.GatewayResponseMessage +operationId+'\n')
 
         return operationId!
-
-        
-        
     }
     
 }
