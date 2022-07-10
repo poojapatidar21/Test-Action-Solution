@@ -1,13 +1,12 @@
-import { IConfig } from "../Common/iConfig";
-import { Config } from "../Common/config";
-import { ConfigKeys } from "../Common/configKeys";
-import { KVIdentityConfig } from "../Common/keyVaultIndentityConfig";
+import { IConfig } from "../Common/iConfig"; 
+import { Config } from "../Common/config"; 
+import { ConfigKeys } from "../Common/configKeys"; 
+import { KVIdentityConfig } from "../Common/keyVaultIndentityConfig"; 
 import { KeyVaultSecret } from "@azure/keyvault-secrets";
 import { KeyVaultCertificateWithPolicy } from "@azure/keyvault-certificates";
 import { convertPFX } from "../Common/certConverter";
-import * as keyVaultUtility from "../Common/keyVaultUtility";
-import { ExceptionMessages } from "../Common/exceptionMessages";
-import { Constant } from "../Common/constants";
+import * as keyVaultUtility from '../Common/keyVaultUtility' 
+import { ExceptionMessages } from "../Common/exceptionMessages"; 
 
 
 export class ConfigManager{
@@ -39,9 +38,7 @@ export class ConfigManager{
         this.config.ProductState= "new"
         this.config.Environment= "Developer"
         this.config.Audience= "Workflow.A_S_AV_PackageManager"
-        this.config.AppInsightsLoggingKey = "33e01921-4d64-4f8c-a055-5bdaffd5e33d"
-        this.config.StatusPollingInterval = Constant.DelayBetweenEveryGetStatus
-        
+
         if (this.config.ConnectedServiceName == 'Bad' || this.config.ConnectedServiceName == undefined) {
 
             throw new Error(ExceptionMessages.BadInputGivenFor + ConfigKeys?.ConnectedServiceName);
@@ -55,7 +52,7 @@ export class ConfigManager{
             this.config.KVIdentityConfig.KeyVaultName= "Keyvault-2-basic"
             this.config.KVIdentityConfig.AuthCertName= "Package-Maven"
             this.config.KVIdentityConfig.ClientId= "1f4aeb8e-6298-435d-a918-e2f4c0d62089"
-            this.config.KVIdentityConfig.ClientSecret= "ba243820-6d27-4069-87fd-959715a73504"
+            this.config.KVIdentityConfig.ClientSecret= "pepery"
             // this.config.KVIdentityConfig.SignCertName= "xyz"
         }
         else {
