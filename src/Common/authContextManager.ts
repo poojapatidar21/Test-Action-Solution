@@ -21,7 +21,7 @@ export class AuthenticationManger implements IAuthenticationManager{
 
         const clientConfig={
             auth:{
-                clientId:this.config!.ClientId!,
+                clientId:this.config!.KVIdentityConfig!.ClientId!,
                 authority:authorityUrl,
                 ClientCertificate:{
                     thumbprint:this.config!.AuthCertThumbprint,
