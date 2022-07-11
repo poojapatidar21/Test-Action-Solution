@@ -32,7 +32,9 @@ export class AuthenticationManger implements IAuthenticationManager{
         }
     
     console.log("trying to check token")
+    try{
         const cca = new Msal.ConfidentialClientApplication(clientConfig)
+    
         var gatewayScope=resourceUri+"/.default"
         const clientCredentialRequest={
             scopes:[gatewayScope]
@@ -44,7 +46,9 @@ export class AuthenticationManger implements IAuthenticationManager{
             console.log(ExceptionMessages.TokenAcquiringError)
             throw error
         })
+    }catch(e){console.log(e)}
         return "success"
+        
     }
 
 
