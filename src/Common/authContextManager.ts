@@ -30,25 +30,20 @@ export class AuthenticationManger implements IAuthenticationManager{
                 }
             }
         }
-    
-    console.log("trying to check token")
-    try{
+        console.log(clientConfig,'clientconfig output')
+
         const cca = new Msal.ConfidentialClientApplication(clientConfig)
-    
         var gatewayScope=resourceUri+"/.default"
         const clientCredentialRequest={
             scopes:[gatewayScope]
         }
-        console.log("trying to aquire token")
         await cca.acquireTokenByClientCredential(clientCredentialRequest).then((response)=>{
             this.accessToken=response?.accessToken!
         }).catch((error)=>{
             console.log(ExceptionMessages.TokenAcquiringError)
             throw error
         })
-    }catch(e){console.log(e)}
         return "success"
-        
     }
 
 
