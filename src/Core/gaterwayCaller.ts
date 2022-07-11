@@ -17,11 +17,14 @@ export class GatewayCaller {
         this.messageCreator=_messageCreator?_messageCreator: new MessageCreator(this.config)
     }
     private async FillAccessToken(){
+        console.log('call fillaccesstoken')
         if (this.authContext?.accessToken==undefined){
+            console.log('setting accesstoken')
             await this.authContext!.setAccessToken().catch((error:any)=>
             {   
                 throw error
             })
+            console.log("got accesstoken")
         }
     }
 

@@ -20,6 +20,7 @@ export async function run() {
         })
 
         var gatewayCommunicator=new GatewayCaller(configManager.config!)
+        console.log(configManager.config!)
         let operationId=''
         await gatewayCommunicator.GatewayCalling().then((responseId:string)=>{
             operationId=responseId

@@ -22,7 +22,7 @@ export class AuthenticationManger implements IAuthenticationManager{
         const clientConfig={
             auth:{
                 clientId:this.config!.ClientId!,
-                authrity:authorityUrl,
+                authority:authorityUrl,
                 ClientCertificate:{
                     thumbprint:this.config!.AuthCertThumbprint,
                     privateKey:this.config!.AuthPrivateKey,
