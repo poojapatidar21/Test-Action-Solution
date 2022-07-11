@@ -7,6 +7,7 @@ import { KeyVaultCertificateWithPolicy } from "@azure/keyvault-certificates";
 import { convertPFX } from "../Common/certConverter";
 import * as keyVaultUtility from '../Common/keyVaultUtility' 
 import { ExceptionMessages } from "../Common/exceptionMessages"; 
+import { Constant } from "../Common/constants";
 
 
 export class ConfigManager{
@@ -25,11 +26,11 @@ export class ConfigManager{
     }
 
     private setConfigVariables(){
-        this.config.ConnectedServiceName=""
+        this.config.ConnectedServiceName="releaseService"
         this.config.Intent= "PackageDistribution"
         this.config.ContentType= "Maven"
         this.config.PackageLocation="a:/D/Release/filefolder"
-        this.config.Owners= "xyz@microsoft.com"
+        this.config.Owners= "t-ppatiar@microsoft.com"
         this.config.Approvers= "abc@microsoft.com"
         this.config.ServiceEndpointUrl= "https://api.esrp.microsoft.com"
         this.config.MainPublisher= "ESRPRELPACMAN"
@@ -39,7 +40,7 @@ export class ConfigManager{
         this.config.Environment= "Developer"
         this.config.Audience= "Workflow.A_S_AV_PackageManager"
 
-        if (this.config.ConnectedServiceName == 'Bad' || this.config.ConnectedServiceName == undefined) {
+        if (this.config.ConnectedServiceName == Constant.Bad || this.config.ConnectedServiceName == undefined) {
 
             throw new Error(ExceptionMessages.BadInputGivenFor + ConfigKeys?.ConnectedServiceName);
         }
@@ -47,17 +48,18 @@ export class ConfigManager{
 
     private setKVIdentityConfig(){
         this.config.KVIdentityConfig= new KVIdentityConfig()
-        if (this.config.Environment!=undefined && this.config.Environment== 'Developer'){
+        if (this.config.Environment!=undefined && this.config.Environment== Constant.Developer){
             this.config.KVIdentityConfig.TenantId= "eb2b6278-b96d-4200-89a6-bcd387294884"
             this.config.KVIdentityConfig.KeyVaultName= "Keyvault-2-basic"
-            this.config.KVIdentityConfig.AuthCertName= "Package-Maven"
+            this.config.KVIdentityConfig.AuthCertName= "package-manager"
             this.config.KVIdentityConfig.ClientId= "1f4aeb8e-6298-435d-a918-e2f4c0d62089"
-            this.config.KVIdentityConfig.ClientSecret= "x~c8Q~qu9Il16almyTeM8-WWjjdq.NPhORNW_au1"
+            this.config.KVIdentityConfig.ClientSecret= "6JH8Q~4SMjZV0WQufkqzpxyZF.GXnZjyf1-ELaBa"
             // this.config.KVIdentityConfig.SignCertName= "xyz"
         }
         else {
             console.log("Environment is undefined")
         }
+        this.config.ClientId="1f4aeb8e-6298-435d-a918-e2f4c0d62089"
     }
 
     private async SetCertificatesInfo(){
