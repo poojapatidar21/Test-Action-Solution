@@ -1,30 +1,30 @@
-import * as core from "@actions/core"
 import http from 'http'
 import { ConfigManager } from "./Core/configManager"
 import { ExceptionMessages } from "./Common/exceptionMessages"
 import { GatewayCaller } from "./Core/gaterwayCaller"
-import {MSEssGatewayClientContractsOperationResponse} from './Common/api'
+import {MSEssGatewayClientContractsOperationResponse, MSEssGatewayClientContractsReleaseResponseReleaseDetailsMessage} from './Common/api'
 import { Constant } from "./Common/constants"
 
 export async function run() {
     try{
-        const ConnectedServiceName:string = core.getInput('ConnectedServiceName')
-        console.log(ConnectedServiceName)
-        
         var configManager= new ConfigManager()
         await configManager.PopulateConfiguration().then(()=>{
+
             console.log(Constant.ConfigPopulatingSuccess)
+
         }).catch((error:any)=>{
+
         console.log(ExceptionMessages.ConfigCreationFailed)
         throw error
         })
 
         var gatewayCommunicator=new GatewayCaller(configManager.config!)
-        console.log(configManager.config!)
         let operationId=''
         await gatewayCommunicator.GatewayCalling().then((responseId:string)=>{
+
             operationId=responseId
         }).catch((error:any)=>{
+
             console.log(ExceptionMessages.GatewayCallingExecutionFailed)
             var finalError =new Error()
             try{
@@ -36,10 +36,34 @@ export async function run() {
             }
             throw finalError
         })
+        await gatewayCommunicator.GatewayPolling(operationId).then().catch((error: any) => {
+
+            console.log(ExceptionMessages.GatewayPollingExecutionFailed);
+            var finalError = new Error();
+            try {
+
+                let err = error as { response: http.IncomingMessage; body: MSEssGatewayClientContractsReleaseResponseReleaseDetailsMessage };
+                finalError = new Error(err.response.statusCode + '--' + err.response.statusMessage);
+            }
+            catch (er) {
+
+                throw error;
+            }
+            throw finalError;
+        })
     
 
     } catch(error){
-        console.log(error)
+        console.log(ExceptionMessages.ExecutionFailed);
+        try {
+
+            let err = error as Error;
+            console.log(err.message);
+        }
+        catch (er) {
+
+            console.log(error);
+        }
     }
     
 }

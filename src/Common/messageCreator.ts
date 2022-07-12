@@ -14,7 +14,6 @@ import AdmZip from 'adm-zip'
 import jwt from 'jsonwebtoken'
 import {JwtHeader} from 'jsonwebtoken'
 
-
 export class MessageCreator implements IMessageCreator {
 
     config: IConfig;

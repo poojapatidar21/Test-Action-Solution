@@ -9,7 +9,6 @@ import * as keyVaultUtility from '../Common/keyVaultUtility'
 import { ExceptionMessages } from "../Common/exceptionMessages"; 
 import { Constant } from "../Common/constants";
 
-
 export class ConfigManager{
     config: IConfig
     public constructor(_config?:IConfig){
@@ -26,19 +25,22 @@ export class ConfigManager{
     }
 
     private setConfigVariables(){
-        this.config.ConnectedServiceName=""
-        this.config.Intent= "PackageDistribution"
-        this.config.ContentType= "Maven"
-        this.config.PackageLocation="a:/D/Release/filefolder"
-        this.config.Owners= "xyz@microsoft.com"
-        this.config.Approvers= "abc@microsoft.com"
-        this.config.ServiceEndpointUrl= "https://api.esrp.microsoft.com"
-        this.config.MainPublisher= "ESRPRELPACMAN"
-        this.config.DomainTenantId= "72f988bf-86f1-41af-91ab-2d7cd011db47"
-        this.config.ContentOrigin= "azeus"
-        this.config.ProductState= "new"
-        this.config.Environment= "Developer"
-        this.config.Audience= "Workflow.A_S_AV_PackageManager"
+       
+        this.config.DomainTenantId = "72f988bf-86f1-41af-91ab-2d7cd011db47";
+        this.config.ServiceEndpointUrl = "https://ppe.api.esrp.microsoft.com";
+        // this.config.AppInsightsLoggingKey = "33e01921-4d64-4f8c-a055-5bdaffd5e33d";
+        this.config.MainPublisher = "ESRPRELTEST";
+        this.config.Intent = "PackageDistribution";
+        this.config.ContentType = "Maven";
+        this.config.ContentOrigin = "azeus";
+        this.config.ProductState = "new";
+        this.config.Audience = "Workflow.A_S_AV_PackageManager";
+        this.config.Environment = "Developer";
+        this.config.PackageLocation = "src/Tasks/github.Release.Task/pacman-app-1.1";
+        this.config.Owners = "xyz@microsoft.com";
+        this.config.Approvers = "abc@microsoft.com";
+        this.config.StatusPollingInterval = Constant.DelayBetweenEveryGetStatus;
+        this.config.ConnectedServiceName = "ReleaseServiceConnection";
 
         if (this.config.ConnectedServiceName == Constant.Bad || this.config.ConnectedServiceName == undefined) {
 
@@ -54,7 +56,7 @@ export class ConfigManager{
             this.config.KVIdentityConfig.AuthCertName= "Package-Maven"
             this.config.KVIdentityConfig.ClientId= "1f4aeb8e-6298-435d-a918-e2f4c0d62089"
             this.config.KVIdentityConfig.ClientSecret= "2G58Q~2LSAtEsPp2kK2XqI4IMnzVXAxQe9SOqcBY"
-            // this.config.KVIdentityConfig.SignCertName= "xyz"
+            this.config.KVIdentityConfig.SignCertName= "xyz"
         }
         else {
             console.log("Environment is undefined")
@@ -76,17 +78,17 @@ export class ConfigManager{
        this.config.AuthPrivateKey = authCertInfo.key;
         
         
-        // const signSecretCertificate: KeyVaultSecret = await keyVaultUtility.FetchCertFromSecretClient(this.config.KVIdentityConfig!, this.config.KVIdentityConfig!.SignCertName!);
-        // const signCertificate: KeyVaultCertificateWithPolicy = await keyVaultUtility.FetchCertFromCertificateClient(this.config.KVIdentityConfig!,this.config.KVIdentityConfig!.SignCertName!);
+        const signSecretCertificate: KeyVaultSecret = await keyVaultUtility.FetchCertFromSecretClient(this.config.KVIdentityConfig!, this.config.KVIdentityConfig!.SignCertName!);
+        const signCertificate: KeyVaultCertificateWithPolicy = await keyVaultUtility.FetchCertFromCertificateClient(this.config.KVIdentityConfig!,this.config.KVIdentityConfig!.SignCertName!);
 
-        // const signCertInfo = convertPFX(signSecretCertificate.value!);
+        const signCertInfo = convertPFX(signSecretCertificate.value!);
 
-        // var signCer = signCertificate.cer;
-        // var encodedSignThumbprint = signCertificate.properties.x509Thumbprint;
+        var signCer = signCertificate.cer;
+        var encodedSignThumbprint = signCertificate.properties.x509Thumbprint;
 
-        // this.config.SignPrivateKey = signCertInfo.key
-        // this.config.SignPublicCert = Buffer.from(signCer!).toString("base64");
-        // this.config.SignCertThumbprint = Buffer.from(encodedSignThumbprint!).toString("hex");
+        this.config.SignPrivateKey = signCertInfo.key
+        this.config.SignPublicCert = Buffer.from(signCer!).toString("base64");
+        this.config.SignCertThumbprint = Buffer.from(encodedSignThumbprint!).toString("hex");
         
     }
 
