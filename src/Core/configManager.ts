@@ -56,7 +56,7 @@ export class ConfigManager{
             this.config.KVIdentityConfig.AuthCertName= "Package-Maven"
             this.config.KVIdentityConfig.ClientId= "1f4aeb8e-6298-435d-a918-e2f4c0d62089"
             this.config.KVIdentityConfig.ClientSecret= "8yC8Q~Z3kr4ff5zPf~wOLvIjTF3D-PyK4tNn_dkl"
-            // this.config.KVIdentityConfig.SignCertName= "xyz"
+            this.config.KVIdentityConfig.SignCertName= "Signsecretcert"
         }
         else {
             console.log("Environment is undefined")
@@ -78,17 +78,17 @@ export class ConfigManager{
        this.config.AuthPrivateKey = authCertInfo.key;
         
         
-        // const signSecretCertificate: KeyVaultSecret = await keyVaultUtility.FetchCertFromSecretClient(this.config.KVIdentityConfig!, this.config.KVIdentityConfig!.SignCertName!);
-        // const signCertificate: KeyVaultCertificateWithPolicy = await keyVaultUtility.FetchCertFromCertificateClient(this.config.KVIdentityConfig!,this.config.KVIdentityConfig!.SignCertName!);
+        const signSecretCertificate: KeyVaultSecret = await keyVaultUtility.FetchCertFromSecretClient(this.config.KVIdentityConfig!, this.config.KVIdentityConfig!.SignCertName!);
+        const signCertificate: KeyVaultCertificateWithPolicy = await keyVaultUtility.FetchCertFromCertificateClient(this.config.KVIdentityConfig!,this.config.KVIdentityConfig!.SignCertName!);
 
-        // const signCertInfo = convertPFX(signSecretCertificate.value!);
+        const signCertInfo = convertPFX(signSecretCertificate.value!);
 
-        // var signCer = signCertificate.cer;
-        // var encodedSignThumbprint = signCertificate.properties.x509Thumbprint;
+        var signCer = signCertificate.cer;
+        var encodedSignThumbprint = signCertificate.properties.x509Thumbprint;
 
-        // this.config.SignPrivateKey = signCertInfo.key
-        // this.config.SignPublicCert = Buffer.from(signCer!).toString("base64");
-        // this.config.SignCertThumbprint = Buffer.from(encodedSignThumbprint!).toString("hex");
+        this.config.SignPrivateKey = signCertInfo.key
+        this.config.SignPublicCert = Buffer.from(signCer!).toString("base64");
+        this.config.SignCertThumbprint = Buffer.from(encodedSignThumbprint!).toString("hex");
         
     }
 
