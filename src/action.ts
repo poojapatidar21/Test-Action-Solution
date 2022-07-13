@@ -29,7 +29,7 @@ export async function run() {
             console.log(ExceptionMessages.GatewayCallingExecutionFailed)
             var finalError =new Error()
             try{
-                let err=error as {response: http.IncomingMessage; body: MSEssGatewayClientContractsOperationResponse;}
+                let err=error as {response: http.IncomingMessage  ;body: MSEssGatewayClientContractsOperationResponse }
                 finalError=new Error(err.response.statusCode+'--'+err.response.statusMessage)
 
             }  catch(er){
@@ -39,31 +39,31 @@ export async function run() {
         })
         await gatewayCommunicator.GatewayPolling(operationId).then().catch((error: any) => {
 
-            console.log(ExceptionMessages.GatewayPollingExecutionFailed);
-            var finalError = new Error();
+            console.log(ExceptionMessages.GatewayPollingExecutionFailed) 
+            var finalError = new Error() 
             try {
 
-                let err = error as { response: http.IncomingMessage; body: MSEssGatewayClientContractsReleaseResponseReleaseDetailsMessage };
-                finalError = new Error(err.response.statusCode + '--' + err.response.statusMessage);
+                let err = error as { response: http.IncomingMessage  ;body: MSEssGatewayClientContractsReleaseResponseReleaseDetailsMessage } 
+                finalError = new Error(err.response.statusCode + '--' + err.response.statusMessage) 
             }
             catch (er) {
 
-                throw error;
+                throw error 
             }
-            throw finalError;
+            throw finalError 
         })
     
 
     } catch(error){
-        console.log(ExceptionMessages.ExecutionFailed);
+        console.log(ExceptionMessages.ExecutionFailed) 
         try {
 
-            let err = error as Error;
-            console.log(err.message);
+            let err = error as Error 
+            console.log(err.message) 
         }
         catch (er) {
 
-            console.log(error);
+            console.log(error) 
         }
     }
     

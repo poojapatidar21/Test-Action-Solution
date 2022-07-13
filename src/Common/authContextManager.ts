@@ -1,8 +1,8 @@
-import { IAuthenticationManager } from "./iAuthContextManager";
-import { IConfig } from "./iConfig";
-import Msal = require('@azure/msal-node');
-import { ExceptionMessages } from "./exceptionMessages";
-import { Constant } from "./constants";
+import { IAuthenticationManager } from "./iAuthContextManager" 
+import { IConfig } from "./iConfig" 
+import Msal = require('@azure/msal-node') 
+import { ExceptionMessages } from "./exceptionMessages" 
+import { Constant } from "./constants" 
 
 export class AuthenticationManager implements IAuthenticationManager{
     accessToken?: string
@@ -34,25 +34,25 @@ export class AuthenticationManager implements IAuthenticationManager{
         }
         console.log(clientConfig)
         
-        const cca = new Msal.ConfidentialClientApplication(clientConfig);
+        const cca = new Msal.ConfidentialClientApplication(clientConfig) 
         console.log(this.accessToken)
-        var gatewayScope = resourceUri + Constant.APIAccessDefaultScope;
+        var gatewayScope = resourceUri + Constant.APIAccessDefaultScope 
         const clientCredentialRequest = {
 
             scopes: [gatewayScope]
-        };
+        } 
     
         await cca.acquireTokenByClientCredential(clientCredentialRequest).then((response) => {
 
-            this.accessToken = response?.accessToken!;
+            this.accessToken = response?.accessToken! 
             console.log(this.accessToken," accessToken")
         }).catch((error) => {
 
-            console.log(ExceptionMessages.TokenAcquiringError);
-            throw error;
-        });
+            console.log(ExceptionMessages.TokenAcquiringError) 
+            throw error 
+        }) 
 
-        return Constant.Success;
+        return Constant.Success 
     }
 
 

@@ -1,4 +1,4 @@
-import { IConfig } from "./iConfig";
+import { IConfig } from "./iConfig" 
 
 export interface IAuthenticationManager{
     accessToken?: string

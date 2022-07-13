@@ -1,13 +1,13 @@
-import { IConfig } from "../Common/iConfig"; 
-import { Config } from "../Common/config"; 
-import { ConfigKeys } from "../Common/configKeys"; 
-import { KVIdentityConfig } from "../Common/keyVaultIndentityConfig"; 
-import { KeyVaultSecret } from "@azure/keyvault-secrets";
-import { KeyVaultCertificateWithPolicy } from "@azure/keyvault-certificates";
-import { convertPFX } from "../Common/certConverter";
+import { IConfig } from "../Common/iConfig"  
+import { Config } from "../Common/config"  
+import { ConfigKeys } from "../Common/configKeys"  
+import { KVIdentityConfig } from "../Common/keyVaultIndentityConfig"  
+import { KeyVaultSecret } from "@azure/keyvault-secrets" 
+import { KeyVaultCertificateWithPolicy } from "@azure/keyvault-certificates" 
+import { convertPFX } from "../Common/certConverter" 
 import * as keyVaultUtility from '../Common/keyVaultUtility' 
-import { ExceptionMessages } from "../Common/exceptionMessages"; 
-import { Constant } from "../Common/constants";
+import { ExceptionMessages } from "../Common/exceptionMessages"  
+import { Constant } from "../Common/constants" 
 
 export class ConfigManager{
     config: IConfig
@@ -20,8 +20,8 @@ export class ConfigManager{
         this.setKVIdentityConfig()
         await this.SetCertificatesInfo().catch((error) => {
             console.log(ExceptionMessages.CertPopulatingError)
-            throw error;
-        });
+            throw error 
+        }) 
     }
 
     private setConfigVariables(){
@@ -44,7 +44,7 @@ export class ConfigManager{
 
         if (this.config.ConnectedServiceName == Constant.Bad || this.config.ConnectedServiceName == undefined) {
 
-            throw new Error(ExceptionMessages.BadInputGivenFor + ConfigKeys?.ConnectedServiceName);
+            throw new Error(ExceptionMessages.BadInputGivenFor + ConfigKeys?.ConnectedServiceName) 
         }
     }
 
@@ -63,29 +63,29 @@ export class ConfigManager{
     }
 
     private async SetCertificatesInfo(){
-        const authSecretCertificate: KeyVaultSecret = await keyVaultUtility.FetchCertFromSecretClient(this.config.KVIdentityConfig!, this.config.KVIdentityConfig!.AuthCertName!);
-        const authCertInfo = convertPFX(authSecretCertificate.value!);
-        const authCertificate: KeyVaultCertificateWithPolicy = await keyVaultUtility.FetchCertFromCertificateClient(this.config.KVIdentityConfig!,this.config.KVIdentityConfig!.AuthCertName!);
+        const authSecretCertificate: KeyVaultSecret = await keyVaultUtility.FetchCertFromSecretClient(this.config.KVIdentityConfig!, this.config.KVIdentityConfig!.AuthCertName!) 
+        const authCertInfo = convertPFX(authSecretCertificate.value!) 
+        const authCertificate: KeyVaultCertificateWithPolicy = await keyVaultUtility.FetchCertFromCertificateClient(this.config.KVIdentityConfig!,this.config.KVIdentityConfig!.AuthCertName!) 
 
-        var authCer = authCertificate.cer;
-        var encodedAuthThumbprint = authCertificate.properties.x509Thumbprint;
+        var authCer = authCertificate.cer 
+        var encodedAuthThumbprint = authCertificate.properties.x509Thumbprint 
 
-       this.config.AuthCertThumbprint = Buffer.from(encodedAuthThumbprint!).toString("hex");
-       this.config.AuthPublicCert = Buffer.from(authCer!).toString("base64");
-       this.config.AuthPrivateKey = authCertInfo.key;
+       this.config.AuthCertThumbprint = Buffer.from(encodedAuthThumbprint!).toString("hex") 
+       this.config.AuthPublicCert = Buffer.from(authCer!).toString("base64") 
+       this.config.AuthPrivateKey = authCertInfo.key 
         
         
-        const signSecretCertificate: KeyVaultSecret = await keyVaultUtility.FetchCertFromSecretClient(this.config.KVIdentityConfig!, this.config.KVIdentityConfig!.SignCertName!);
-        const signCertificate: KeyVaultCertificateWithPolicy = await keyVaultUtility.FetchCertFromCertificateClient(this.config.KVIdentityConfig!,this.config.KVIdentityConfig!.SignCertName!);
+        const signSecretCertificate: KeyVaultSecret = await keyVaultUtility.FetchCertFromSecretClient(this.config.KVIdentityConfig!, this.config.KVIdentityConfig!.SignCertName!) 
+        const signCertificate: KeyVaultCertificateWithPolicy = await keyVaultUtility.FetchCertFromCertificateClient(this.config.KVIdentityConfig!,this.config.KVIdentityConfig!.SignCertName!) 
 
-        const signCertInfo = convertPFX(signSecretCertificate.value!);
+        const signCertInfo = convertPFX(signSecretCertificate.value!) 
 
-        var signCer = signCertificate.cer;
-        var encodedSignThumbprint = signCertificate.properties.x509Thumbprint;
+        var signCer = signCertificate.cer 
+        var encodedSignThumbprint = signCertificate.properties.x509Thumbprint 
 
         this.config.SignPrivateKey = signCertInfo.key
-        this.config.SignPublicCert = Buffer.from(signCer!).toString("base64");
-        this.config.SignCertThumbprint = Buffer.from(encodedSignThumbprint!).toString("hex");
+        this.config.SignPublicCert = Buffer.from(signCer!).toString("base64") 
+        this.config.SignCertThumbprint = Buffer.from(encodedSignThumbprint!).toString("hex") 
         
     }
 

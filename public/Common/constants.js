@@ -1,6 +1,6 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.Constant = void 0;
+"use strict" 
+Object.defineProperty(exports, "__esModule", { value: true }) 
+exports.Constant = void 0 
 exports.Constant = {
     DefaultTenant: '72f988bf-86f1-41af-91ab-2d7cd011db47',
     AuthorityHostUrl: 'https://login.microsoftonline.com',
@@ -58,4 +58,4 @@ exports.Constant = {
     Version: 'version',
     ReleaseUIAccessMessage: 'Status can be checked here as well - https://releaseui-wus-esrp-prod.azurewebsites.net/Release/Search/#',
     DescriptionMandatoryMessage: "Description is not present and is a mandatory field, adding product name to description \n"
-};
+} 

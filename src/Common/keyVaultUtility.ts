@@ -5,13 +5,13 @@
  * @summary Imports a PFX and PEM certificate and then deletes them.
  */
 
- import { CertificateClient, KeyVaultCertificateWithPolicy } from '@azure/keyvault-certificates';
- import { DefaultAzureCredential } from '@azure/identity';
- import { KeyVaultSecret, SecretClient } from '@azure/keyvault-secrets'; 
- import { IKVIdentityConfig } from './iKeyVaultIdentityConfig';
+ import { CertificateClient, KeyVaultCertificateWithPolicy } from '@azure/keyvault-certificates' 
+ import { DefaultAzureCredential } from '@azure/identity' 
+ import { KeyVaultSecret, SecretClient } from '@azure/keyvault-secrets'  
+ import { IKVIdentityConfig } from './iKeyVaultIdentityConfig' 
  
- var certificateWithPolicy: KeyVaultCertificateWithPolicy;
- var certificateSecret: KeyVaultSecret;
+ var certificateWithPolicy: KeyVaultCertificateWithPolicy 
+ var certificateSecret: KeyVaultSecret 
   // This sample demonstrates how to import both PKCS#12 (PFX) and PEM-formatted certificates
   // into Azure Key Vault.
   export async function FetchCertFromSecretClient(kvIdentityConfig: IKVIdentityConfig, certName: string): Promise<KeyVaultSecret> {
@@ -22,19 +22,19 @@
     // - AZURE_CLIENT_SECRET: The client secret for the registered application
     try {
        
-       let kvUrl: string = `https://${kvIdentityConfig.KeyVaultName}.vault.azure.net`;
+       let kvUrl: string = `https://${kvIdentityConfig.KeyVaultName}.vault.azure.net` 
  
-       SetCredentialsForRequest(kvIdentityConfig);
-       const credential = new DefaultAzureCredential();
-       const secretClient = new SecretClient(kvUrl, credential);
+       SetCredentialsForRequest(kvIdentityConfig) 
+       const credential = new DefaultAzureCredential() 
+       const secretClient = new SecretClient(kvUrl, credential) 
      
-       certificateSecret = await secretClient.getSecret(certName);
+       certificateSecret = await secretClient.getSecret(certName) 
     }
     catch(err) {
        
-       throw err;
+       throw err 
     }
-     return certificateSecret;
+     return certificateSecret 
   }
  
   export async function FetchCertFromCertificateClient(kvIdentityConfig: IKVIdentityConfig, certName: string): Promise<KeyVaultCertificateWithPolicy> {
@@ -45,24 +45,24 @@
     // - AZURE_CLIENT_SECRET: The client secret for the registered application
     try {
  
-       let kvUrl: string = `https://${kvIdentityConfig.KeyVaultName}.vault.azure.net`;
+       let kvUrl: string = `https://${kvIdentityConfig.KeyVaultName}.vault.azure.net` 
  
-       SetCredentialsForRequest(kvIdentityConfig);
-       const credential = new DefaultAzureCredential();
-       const client = new CertificateClient(kvUrl, credential);
+       SetCredentialsForRequest(kvIdentityConfig) 
+       const credential = new DefaultAzureCredential() 
+       const client = new CertificateClient(kvUrl, credential) 
      
-       certificateWithPolicy = await client.getCertificate(certName);
+       certificateWithPolicy = await client.getCertificate(certName) 
     }
     catch(err) {
        
-       throw err;
+       throw err 
     }
-      return certificateWithPolicy;
+      return certificateWithPolicy 
   }
  
  function SetCredentialsForRequest(kvIdentityConfig: IKVIdentityConfig) {
  
-    process.env["AZURE_TENANT_ID"] = kvIdentityConfig.TenantId;
-    process.env["AZURE_CLIENT_ID"] = kvIdentityConfig.ClientId;
-    process.env["AZURE_CLIENT_SECRET"] = kvIdentityConfig.ClientSecret;
+    process.env["AZURE_TENANT_ID"] = kvIdentityConfig.TenantId 
+    process.env["AZURE_CLIENT_ID"] = kvIdentityConfig.ClientId 
+    process.env["AZURE_CLIENT_SECRET"] = kvIdentityConfig.ClientSecret 
  }
