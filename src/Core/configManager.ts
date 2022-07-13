@@ -8,6 +8,7 @@ import { convertPFX } from "../Common/certConverter"
 import * as keyVaultUtility from '../Common/keyVaultUtility' 
 import { ExceptionMessages } from "../Common/exceptionMessages"  
 import { Constant } from "../Common/constants" 
+import * as core from "@actions/core";
 
 export class ConfigManager{
     config: IConfig
@@ -40,7 +41,7 @@ export class ConfigManager{
         this.config.Owners = "xyz@microsoft.com"
         this.config.Approvers = "abc@microsoft.com"
         this.config.StatusPollingInterval = Constant.DelayBetweenEveryGetStatus
-        this.config.ConnectedServiceName = "ReleaseServiceConnection"
+        this.config.ConnectedServiceName = core.getInput('ConnectedServiceName')
 
         if (this.config.ConnectedServiceName == Constant.Bad || this.config.ConnectedServiceName == undefined) {
 
@@ -58,7 +59,8 @@ export class ConfigManager{
             this.config.KVIdentityConfig.ClientId= process.env["KVAUTHCLIENT"]
             this.config.KVIdentityConfig.ClientSecret= process.env["KVAUTHSECRET"]
        
-        
+        console.log(this.config.KVIdentityConfig.ClientId)
+        console.log(this.config.KVIdentityConfig.ClientSecret)
         this.config.ClientId= this.config.KVIdentityConfig.SignCertName
     }
 
