@@ -51,7 +51,7 @@ export class ConfigManager{
     private setKVIdentityConfig(){
         this.config.KVIdentityConfig= new KVIdentityConfig()
         if (this.config.Environment!=undefined && this.config.Environment== 'Developer'){
-            this.config.KVIdentityConfig.TenantId= "eb2b6278-b96d-4200-89a6-bcd387294884"
+            this.config.KVIdentityConfig.TenantId= "33e01921-4d64-4f8c-a055-5bdaffd5e33d"
             this.config.KVIdentityConfig.KeyVaultName= "esrprelease-test-prod"
             this.config.KVIdentityConfig.AuthCertName= "74cd0b2a-8473-475e-9bfd-445ec0847a84"
             this.config.KVIdentityConfig.ClientId= process.env["KVAUTHCLIENT"]
