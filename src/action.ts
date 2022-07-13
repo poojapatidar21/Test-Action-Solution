@@ -17,8 +17,9 @@ export async function run() {
         console.log(ExceptionMessages.ConfigCreationFailed)
         throw error
         })
-
+        console.log(configManager.config!)
         var gatewayCommunicator=new GatewayCaller(configManager.config!)
+        
         let operationId=''
         await gatewayCommunicator.GatewayCalling().then((responseId:string)=>{
 
