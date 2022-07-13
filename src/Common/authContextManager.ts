@@ -33,19 +33,23 @@ export class AuthenticationManager implements IAuthenticationManager{
             }
         }
         console.log(clientConfig)
+        const cca = new Msal.ConfidentialClientApplication(clientConfig);
+        var gatewayScope = resourceUri + Constant.APIAccessDefaultScope;
+        const clientCredentialRequest = {
 
-        const cca = new Msal.ConfidentialClientApplication(clientConfig)
-        var gatewayScope=resourceUri+"/.default"
-        const clientCredentialRequest={
-            scopes:[gatewayScope]
-        }
-        await cca.acquireTokenByClientCredential(clientCredentialRequest).then((response)=>{
-            this.accessToken=response?.accessToken!
-        }).catch((error)=>{
-            console.log(ExceptionMessages.TokenAcquiringError)
-            throw error
-        })
-        return "success"
+            scopes: [gatewayScope]
+        };
+    
+        await cca.acquireTokenByClientCredential(clientCredentialRequest).then((response) => {
+
+            this.accessToken = response?.accessToken!;
+        }).catch((error) => {
+
+            console.log(ExceptionMessages.TokenAcquiringError);
+            throw error;
+        });
+
+        return Constant.Success;
     }
 
 
