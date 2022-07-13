@@ -32,6 +32,7 @@ export class AuthenticationManager implements IAuthenticationManager{
                 }
             }
         }
+        console.log(clientConfig)
 
         const cca = new Msal.ConfidentialClientApplication(clientConfig)
         var gatewayScope=resourceUri+"/.default"
