@@ -30,15 +30,15 @@ class Inputs {
         this.ConnectedServiceName = core.getInput('ConnectedServiceName');
         this.Intent = core.getInput('Intent');
         this.ContentType = core.getInput('ContentType');
+        this.Audience = core.getInput('Audience');
         this.PackageLocation = core.getInput('PackageLocation');
         this.Owners = core.getInput('Owners');
         this.Approvers = core.getInput('Approvers');
-        this.ServiceEndpointUrl = core.getInput('ServiceEndpointUrl');
-        this.MainPublisher = core.getInput('MainPublisher');
-        this.DomainTenantId = core.getInput('DomainTenantId');
         this.ContentOrigin = core.getInput('ContentOrigin');
+        this.MainPublisher = core.getInput('MainPublisher');
+        this.ServiceEndpointUrl = core.getInput('ServiceEndpointUrl');
+        this.DomainTenantId = core.getInput('DomainTenantId');
         this.ProductState = core.getInput('ProductState');
-        this.Audience = core.getInput('Audience');
     }
 }
 exports.Inputs = Inputs;

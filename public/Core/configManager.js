@@ -40,11 +40,9 @@ const keyVaultUtility = __importStar(require("../Common/keyVaultUtility"));
 const exceptionMessages_1 = require("../Common/exceptionMessages");
 const constants_1 = require("../Common/constants");
 const core = __importStar(require("@actions/core"));
-const input_1 = require("../Common/input");
 class ConfigManager {
-    constructor(_config, _input) {
+    constructor(_config) {
         this.config = (_config == undefined ? new config_1.Config() : _config);
-        this.input = (_input == undefined ? new input_1.Inputs() : _input);
     }
     PopulateConfiguration() {
         return __awaiter(this, void 0, void 0, function* () {
@@ -57,8 +55,8 @@ class ConfigManager {
         });
     }
     setConfigVariables() {
-        this.config.DomainTenantId = this.input.DomainTenantId;
-        this.config.ServiceEndpointUrl = this.input.ServiceEndpointUrl;
+        this.config.DomainTenantId = core.getInput('DomainTenantId');
+        this.config.ServiceEndpointUrl = core.getInput('ServiceEndpointUrl');
         // this.config.AppInsightsLoggingKey = "33e01921-4d64-4f8c-a055-5bdaffd5e33d"
         this.config.MainPublisher = core.getInput('MainPublisher');
         this.config.Intent = core.getInput('Intent');
