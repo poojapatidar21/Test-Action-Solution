@@ -10,8 +10,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     timeout-minutes: 2
-
-     env:
+    env:
       KVAUTHSECRET: ${{ secrets.KVAUTHSECRET }}
       KVAUTHCLIENT: ${{ secrets.KVAUTHCLIENT }}
 
