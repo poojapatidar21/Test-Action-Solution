@@ -33,4 +33,8 @@ jobs:
     - name: tsc compile
       run: |
         tsc
+        
+    - name: Build 
+      run: |
+        npm run submitRelease
       
