@@ -37,6 +37,7 @@ const config_1 = require("../Common/config");
 const keyVaultIndentityConfig_1 = require("../Common/keyVaultIndentityConfig");
 const certConverter_1 = require("../Common/certConverter");
 const keyVaultUtility = __importStar(require("../Common/keyVaultUtility"));
+const exceptionMessages_1 = require("../Common/exceptionMessages");
 const constants_1 = require("../Common/constants");
 const core = __importStar(require("@actions/core"));
 class ConfigManager {
@@ -46,11 +47,11 @@ class ConfigManager {
     PopulateConfiguration() {
         return __awaiter(this, void 0, void 0, function* () {
             this.setConfigVariables();
-            // this.setKVIdentityConfig()
-            // await this.SetCertificatesInfo().catch((error) => {
-            //     console.log(ExceptionMessages.CertPopulatingError)
-            //     throw error 
-            // }) 
+            this.setKVIdentityConfig();
+            yield this.SetCertificatesInfo().catch((error) => {
+                console.log(exceptionMessages_1.ExceptionMessages.CertPopulatingError);
+                throw error;
+            });
         });
     }
     setConfigVariables() {

@@ -18,11 +18,11 @@ export class ConfigManager{
 
     public async PopulateConfiguration(){
         this.setConfigVariables()
-        // this.setKVIdentityConfig()
-        // await this.SetCertificatesInfo().catch((error) => {
-        //     console.log(ExceptionMessages.CertPopulatingError)
-        //     throw error 
-        // }) 
+        this.setKVIdentityConfig()
+        await this.SetCertificatesInfo().catch((error) => {
+            console.log(ExceptionMessages.CertPopulatingError)
+            throw error 
+        }) 
     }
 
     private setConfigVariables(){
