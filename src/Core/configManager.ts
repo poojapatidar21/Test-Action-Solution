@@ -37,7 +37,7 @@ export class ConfigManager{
         this.config.ProductState = "new"
         this.config.Audience = "Workflow.A_S_AV_PackageManager"
         this.config.Environment = "Developer"
-        this.config.PackageLocation = "C:\\Users\\Administrator\\Desktop\\solution\\Hello-World-Github-Action-Solution\\src\\pacman-app-1.1"
+        this.config.PackageLocation = "../pacman-app-1.1"
         this.config.Owners = "xyz@microsoft.com"
         this.config.Approvers = "abc@microsoft.com"
         this.config.StatusPollingInterval = Constant.DelayBetweenEveryGetStatus
