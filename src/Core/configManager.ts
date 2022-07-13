@@ -55,8 +55,7 @@ export class ConfigManager{
             this.config.KVIdentityConfig.ClientId= process.env["KVAUTHCLIENT"]
             this.config.KVIdentityConfig.ClientSecret= process.env["KVAUTHSECRET"]
        
-        console.log(this.config.KVIdentityConfig.ClientId)
-        console.log(this.config.KVIdentityConfig.ClientSecret)
+        
         this.config.ClientId= this.config.KVIdentityConfig.SignCertName
     }
 

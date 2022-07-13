@@ -4,15 +4,11 @@ import { ExceptionMessages } from "./Common/exceptionMessages"
 import { GatewayCaller } from "./Core/gaterwayCaller"
 import {MSEssGatewayClientContractsOperationResponse, MSEssGatewayClientContractsReleaseResponseReleaseDetailsMessage} from './Common/api'
 import { Constant } from "./Common/constants"
-import * as core from "@actions/core";
 
 export async function run() {
     try{
-        const service:string =core.getInput('service')
-        console.log("input value-",service)
-        
+
         var configManager= new ConfigManager()
-        console.log(configManager.config.ConnectedServiceName)
         await configManager.PopulateConfiguration().then(()=>{
 
             console.log(Constant.ConfigPopulatingSuccess)
@@ -22,7 +18,7 @@ export async function run() {
         console.log(ExceptionMessages.ConfigCreationFailed)
         throw error
         })
-        console.log(configManager.config!)
+       
         var gatewayCommunicator=new GatewayCaller(configManager.config!)
         
         let operationId=''
