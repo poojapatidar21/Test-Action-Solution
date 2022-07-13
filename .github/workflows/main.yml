@@ -11,6 +11,10 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 2
 
+     env:
+      KVAUTHSECRET: ${{ secrets.KVAUTHSECRET }}
+      KVAUTHCLIENT: ${{ secrets.KVAUTHCLIENT }}
+
    
     steps:
     - uses: actions/checkout@v3
