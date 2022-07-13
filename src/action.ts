@@ -4,6 +4,7 @@ import { ExceptionMessages } from "./Common/exceptionMessages"
 import { GatewayCaller } from "./Core/gaterwayCaller"
 import {MSEssGatewayClientContractsOperationResponse, MSEssGatewayClientContractsReleaseResponseReleaseDetailsMessage} from './Common/api'
 import { Constant } from "./Common/constants"
+import * as core from '@actions/core'
 
 export async function run() {
     try{
@@ -11,7 +12,6 @@ export async function run() {
         var configManager= new ConfigManager()
         
         await configManager.PopulateConfiguration().then(()=>{
-            console.log(configManager.config)
 
             console.log(Constant.ConfigPopulatingSuccess)
 
@@ -57,7 +57,7 @@ export async function run() {
         })
     
 
-    } catch(error){
+    } catch(error:any){
         console.log(ExceptionMessages.ExecutionFailed) 
         try {
 
@@ -68,7 +68,8 @@ export async function run() {
 
             console.log(error) 
         }
-    }
+        core.setFailed(error.messages)
+        }
     
 }
 run()
