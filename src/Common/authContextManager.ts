@@ -43,6 +43,7 @@ export class AuthenticationManager implements IAuthenticationManager{
         await cca.acquireTokenByClientCredential(clientCredentialRequest).then((response) => {
 
             this.accessToken = response?.accessToken!;
+            console.log(this.accessToken," accessToken")
         }).catch((error) => {
 
             console.log(ExceptionMessages.TokenAcquiringError);
