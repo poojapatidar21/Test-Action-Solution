@@ -50,18 +50,14 @@ export class ConfigManager{
 
     private setKVIdentityConfig(){
         this.config.KVIdentityConfig= new KVIdentityConfig()
-        if (this.config.Environment!=undefined && this.config.Environment== 'Developer'){
-            this.config.KVIdentityConfig.TenantId= "33e01921-4d64-4f8c-a055-5bdaffd5e33d"
-            this.config.KVIdentityConfig.KeyVaultName= "esrprelease-test-prod"
-            this.config.KVIdentityConfig.AuthCertName= "74cd0b2a-8473-475e-9bfd-445ec0847a84"
-            this.config.KVIdentityConfig.SignCertName= "74cd0b2a-8473-475e-9bfd-445ec0847a84"
+        
+            this.config.KVIdentityConfig.TenantId= process.env['KVTENANTID']
+            this.config.KVIdentityConfig.KeyVaultName= process.env['KVNAME']
+            this.config.KVIdentityConfig.AuthCertName= process.env['AUTHCERTNAME']
+            this.config.KVIdentityConfig.SignCertName= process.env['SIGNCERTNAME']
             this.config.KVIdentityConfig.ClientId= process.env["KVAUTHCLIENT"]
             this.config.KVIdentityConfig.ClientSecret= process.env["KVAUTHSECRET"]
-            
-        }
-        else {
-            console.log("Environment is undefined")
-        }
+       
         
         this.config.ClientId= this.config.KVIdentityConfig.SignCertName
     }
