@@ -1,4 +1,5 @@
 import * as core from "@actions/core";
+import { IConfig } from "./iConfig";
 
 export class Inputs{
     ConnectedServiceName?: string 

@@ -9,11 +9,14 @@ import * as keyVaultUtility from '../Common/keyVaultUtility'
 import { ExceptionMessages } from "../Common/exceptionMessages"  
 import { Constant } from "../Common/constants" 
 import * as core from '@actions/core'
+import { Inputs } from "../Common/input"
 
 export class ConfigManager{
     config: IConfig
-    public constructor(_config?:IConfig){
+    input:Inputs
+    public constructor(_config?:IConfig, _input?:Inputs){
         this.config=(_config==undefined?new Config():_config)
+        this.input=(_input==undefined? new Inputs():_input)
     }
 
     public async PopulateConfiguration(){
@@ -27,8 +30,8 @@ export class ConfigManager{
 
     private setConfigVariables(){
        
-        this.config.DomainTenantId = core.getInput('DomainTenantId')
-        this.config.ServiceEndpointUrl=core.getInput('ServiceEndpointUrl')
+        this.config.DomainTenantId = this.input.DomainTenantId
+        this.config.ServiceEndpointUrl=this.input.ServiceEndpointUrl
         // this.config.AppInsightsLoggingKey = "33e01921-4d64-4f8c-a055-5bdaffd5e33d"
         this.config.MainPublisher = core.getInput('MainPublisher')
         this.config.Intent = core.getInput('Intent')
