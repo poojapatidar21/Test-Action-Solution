@@ -62,7 +62,7 @@ export class ConfigManager{
             console.log("Environment is undefined")
         }
         
-        this.config.KVIdentityConfig.ClientId= "1f4aeb8e-6298-435d-a918-e2f4c0d62089"
+        this.config.KVIdentityConfig.ClientId= "430dfa0a-7d9b-4393-a4bd-6b7292f71501"
     }
 
     private async SetCertificatesInfo(){
