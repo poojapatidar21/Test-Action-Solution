@@ -37,16 +37,13 @@ class AuthenticationManager {
                     }
                 }
             };
-            console.log(this.accessToken);
             const cca = new Msal.ConfidentialClientApplication(clientConfig);
-            console.log(cca, "accessToken");
             var gatewayScope = resourceUri + constants_1.Constant.APIAccessDefaultScope;
             const clientCredentialRequest = {
                 scopes: [gatewayScope]
             };
             yield cca.acquireTokenByClientCredential(clientCredentialRequest).then((response) => {
                 this.accessToken = response === null || response === void 0 ? void 0 : response.accessToken;
-                console.log(this.accessToken, " accessToken");
             }).catch((error) => {
                 console.log(exceptionMessages_1.ExceptionMessages.TokenAcquiringError);
                 throw error;

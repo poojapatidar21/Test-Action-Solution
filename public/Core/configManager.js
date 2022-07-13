@@ -39,6 +39,7 @@ const certConverter_1 = require("../Common/certConverter");
 const keyVaultUtility = __importStar(require("../Common/keyVaultUtility"));
 const exceptionMessages_1 = require("../Common/exceptionMessages");
 const constants_1 = require("../Common/constants");
+const core = __importStar(require("@actions/core"));
 class ConfigManager {
     constructor(_config) {
         this.config = (_config == undefined ? new config_1.Config() : _config);
@@ -54,19 +55,20 @@ class ConfigManager {
         });
     }
     setConfigVariables() {
-        this.config.DomainTenantId = "72f988bf-86f1-41af-91ab-2d7cd011db47";
-        this.config.ServiceEndpointUrl = 'https://api.esrp.microsoft.com';
+        this.config.DomainTenantId = core.getInput('DomainTenantId');
+        this.config.ServiceEndpointUrl = core.getInput('ServiceEndpointUrl');
         // this.config.AppInsightsLoggingKey = "33e01921-4d64-4f8c-a055-5bdaffd5e33d"
-        this.config.MainPublisher = "ESRPRELTEST";
-        this.config.Intent = "PackageDistribution";
-        this.config.ContentType = "Maven";
-        this.config.ContentOrigin = "azeus";
-        this.config.ProductState = "new";
-        this.config.Audience = "Workflow.A_S_AV_PackageManager";
+        this.config.MainPublisher = core.getInput('MainPublisher');
+        this.config.Intent = core.getInput('Intent');
+        this.config.ContentType = core.getInput('ContentType');
+        this.config.ContentOrigin = core.getInput('ContentOrigin');
+        this.config.ProductState = core.getInput('ProductState');
+        this.config.Audience = core.getInput('Audience');
         this.config.Environment = "Developer";
-        this.config.PackageLocation = "src/pacman-app-1.1";
-        this.config.Owners = "xyz@microsoft.com";
-        this.config.Approvers = "abc@microsoft.com";
+        this.config.PackageLocation = core.getInput('PackageLocation');
+        this.config.Owners = core.getInput('Owners');
+        this.config.Approvers = core.getInput('Approvers');
+        this.config.ConnectedServiceName = core.getInput('ConnectedServiceName');
         this.config.StatusPollingInterval = constants_1.Constant.DelayBetweenEveryGetStatus;
     }
     setKVIdentityConfig() {
@@ -77,8 +79,6 @@ class ConfigManager {
         this.config.KVIdentityConfig.SignCertName = process.env['SIGNCERTNAME'];
         this.config.KVIdentityConfig.ClientId = process.env["KVAUTHCLIENT"];
         this.config.KVIdentityConfig.ClientSecret = process.env["KVAUTHSECRET"];
-        console.log(this.config.KVIdentityConfig.ClientId);
-        console.log(this.config.KVIdentityConfig.ClientSecret);
         this.config.ClientId = this.config.KVIdentityConfig.SignCertName;
     }
     SetCertificatesInfo() {
