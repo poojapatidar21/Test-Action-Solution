@@ -52,11 +52,11 @@ export class ConfigManager{
         this.config.KVIdentityConfig= new KVIdentityConfig()
         if (this.config.Environment!=undefined && this.config.Environment== 'Developer'){
             this.config.KVIdentityConfig.TenantId= "eb2b6278-b96d-4200-89a6-bcd387294884"
-            this.config.KVIdentityConfig.KeyVaultName= "Keyvault-2-basic"
-            this.config.KVIdentityConfig.AuthCertName= "Package-Maven"
+            this.config.KVIdentityConfig.KeyVaultName= "esrprelease-test-prod"
+            this.config.KVIdentityConfig.AuthCertName= "74cd0b2a-8473-475e-9bfd-445ec0847a84"
             this.config.KVIdentityConfig.ClientId= "1f4aeb8e-6298-435d-a918-e2f4c0d62089"
-            this.config.KVIdentityConfig.ClientSecret= "8yC8Q~Z3kr4ff5zPf~wOLvIjTF3D-PyK4tNn_dkl"
-            this.config.KVIdentityConfig.SignCertName= "Signsecretcert"
+            this.config.KVIdentityConfig.ClientSecret= "tsp7Q~QAE-xXLsBxYy0au6bYZ~d07ibr7viKP"
+            this.config.KVIdentityConfig.SignCertName= "74cd0b2a-8473-475e-9bfd-445ec0847a84"
         }
         else {
             console.log("Environment is undefined")

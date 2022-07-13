@@ -106,21 +106,21 @@ export class MessageCreator implements IMessageCreator {
         let policyobject : GatewayClient.MSEssGatewayClientContractsRoutingInfo = JSON.parse(policyFile);
     
         var pr = fs.readFileSync(path.join(__dirname, Constant.SubmitReleaseJsonFilePath)).toString();
-        let requests: GatewayClient.MSEssGatewayClientContractsReleaseRequestReleaseRequestMessage = JSON.parse(pr);
-        requests.esrpCorrelationId = this.config.RequestCorrelationId;
-        requests.routingInfo = policyobject;
+        let request: GatewayClient.MSEssGatewayClientContractsReleaseRequestReleaseRequestMessage = JSON.parse(pr);
+        request.esrpCorrelationId = this.config.RequestCorrelationId;
+        request.routingInfo = policyobject;
 
-        requests.routingInfo.contentType = this.config!.ContentType!.toLowerCase();
-        requests.routingInfo.intent = this.config!.Intent!.toLowerCase();
-        requests.routingInfo.audience = this.config!.Audience?.toLowerCase();
-        requests.routingInfo.contentOrigin = this.config!.ContentOrigin?.toLowerCase();
-        requests.routingInfo.productState = this.config!.ProductState?.toLowerCase();
-        requests.releaseInfo!.properties!.releaseContentType = this.config!.ContentType!.toLowerCase();
+        request.routingInfo.contentType = this.config!.ContentType!.toLowerCase();
+        request.routingInfo.intent = this.config!.Intent!.toLowerCase();
+        request.routingInfo.audience = this.config!.Audience?.toLowerCase();
+        request.routingInfo.contentOrigin = this.config!.ContentOrigin?.toLowerCase();
+        request.routingInfo.productState = this.config!.ProductState?.toLowerCase();
+        request.releaseInfo!.properties!.releaseContentType = this.config!.ContentType!.toLowerCase();
     
         let productInfo = await this.FetchProductInfo(this.config!.ContentType!.toLowerCase()).then();
         
-        requests.productInfo = productInfo;
-        requests.releaseInfo!.title = productInfo.name;
+        request.productInfo = productInfo;
+        request.releaseInfo!.title = productInfo.name;
         
         var allOwnersEmail = this.config!.Owners!.split(Constant.Comma);
         allOwnersEmail.forEach(ownerEmail => {
@@ -130,7 +130,7 @@ export class MessageCreator implements IMessageCreator {
             var ownerInfo = new GatewayClient.MSEssGatewayClientContractsReleaseOwnerInfo;
             ownerInfo.owner = userInfo;
     
-            requests.owners?.push(ownerInfo);
+            request.owners?.push(ownerInfo);
         });
     
         var allApprovalsEmail = this.config!.Approvers!.split(Constant.Comma);
@@ -143,11 +143,11 @@ export class MessageCreator implements IMessageCreator {
             approvalInfo.isAutoApproved = Constant.DefaultIsAutoApprovedValue;
             approvalInfo.isMandatory = Constant.DefaultIsMandatoryApprovalValue;
     
-            requests.approvers?.push(approvalInfo);
+            request.approvers?.push(approvalInfo);
         });
     
-        requests.accessPermissionsInfo!.mainPublisher = this.config!.MainPublisher;
-        requests.createdBy!.userPrincipalName = (requests.owners!)[0].owner?.userPrincipalName;
+        request.accessPermissionsInfo!.mainPublisher = this.config!.MainPublisher;
+        request.createdBy!.userPrincipalName = (request.owners!)[0].owner?.userPrincipalName;
         
         var localFileLocation = this.config!.PackageLocation;
         
@@ -182,7 +182,7 @@ export class MessageCreator implements IMessageCreator {
         fileInfo.name = productInfo.name!;
         fileInfo.friendlyFileName = targetFileName;
         
-        requests.files?.push(fileInfo);
+        request.files?.push(fileInfo);
         let crit: Array<string> = Constant.TokenHeaderValidationCriteria.split(Constant.Comma);
     
         let tokenValidityTicks = this.CalculateTokenExpiryInTicksFromHours();
@@ -202,10 +202,10 @@ export class MessageCreator implements IMessageCreator {
             header: jWtHeader as JwtHeader
         };
         
-        const myToken = jwt.sign(requests, this.config!.SignPrivateKey!, signingOptions);
-        requests.jwsToken = myToken;
+        const myToken = jwt.sign(request, this.config!.SignPrivateKey!, signingOptions);
+        request.jwsToken = myToken;
     
-        return requests;
+        return request;
     }
 
     private CalculateTokenExpiryInTicksFromHours() : number {
