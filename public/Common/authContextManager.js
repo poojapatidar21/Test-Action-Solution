@@ -30,14 +30,14 @@ class AuthenticationManager {
                 auth: {
                     clientId: this.config.ClientId,
                     authority: authorityUrl,
-                    ClientCertificate: {
+                    clientCertificate: {
                         thumbprint: this.config.AuthCertThumbprint,
                         privateKey: this.config.AuthPrivateKey,
                         x5c: this.SNIPinningFlag
                     }
                 }
             };
-            console.log(clientConfig);
+            console.log(this.accessToken);
             const cca = new Msal.ConfidentialClientApplication(clientConfig);
             console.log(cca, "accessToken");
             var gatewayScope = resourceUri + constants_1.Constant.APIAccessDefaultScope;

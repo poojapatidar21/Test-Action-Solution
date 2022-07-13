@@ -1,6 +1,6 @@
 import { IAuthenticationManager } from "./iAuthContextManager" 
 import { IConfig } from "./iConfig" 
-import Msal = require('@azure/msal-node') 
+import Msal =require('@azure/msal-node')
 import { ExceptionMessages } from "./exceptionMessages" 
 import { Constant } from "./constants" 
 
@@ -18,22 +18,31 @@ export class AuthenticationManager implements IAuthenticationManager{
     public async setAccessToken(): Promise<string | undefined> {
         var authorityHostUrl = Constant.AuthorityHostUrl
         var tenant = this.config?.DomainTenantId
-        var authorityUrl= authorityHostUrl+'/'+tenant
+        var authorityUrl= authorityHostUrl + '/' + tenant
         var resourceUri = this.config!.ServiceEndpointUrl
 
         const clientConfig={
+
             auth:{
+
                 clientId:this.config!.ClientId!,
+
                 authority:authorityUrl,
-                ClientCertificate:{
-                    thumbprint:this.config!.AuthCertThumbprint,
-                    privateKey:this.config!.AuthPrivateKey,
+
+                clientCertificate:{
+
+                    thumbprint:this.config!.AuthCertThumbprint!,
+
+                    privateKey:this.config!.AuthPrivateKey!,
+
                     x5c:this.SNIPinningFlag
-                }
+
+                 }
+
             }
+
         }
-        console.log(clientConfig)
-       
+        console.log(this.accessToken)
         const cca = new Msal.ConfidentialClientApplication(clientConfig) 
         console.log(cca, "accessToken")
         var gatewayScope = resourceUri + Constant.APIAccessDefaultScope 

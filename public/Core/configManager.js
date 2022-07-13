@@ -34,13 +34,11 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ConfigManager = void 0;
 const config_1 = require("../Common/config");
-const configKeys_1 = require("../Common/configKeys");
 const keyVaultIndentityConfig_1 = require("../Common/keyVaultIndentityConfig");
 const certConverter_1 = require("../Common/certConverter");
 const keyVaultUtility = __importStar(require("../Common/keyVaultUtility"));
 const exceptionMessages_1 = require("../Common/exceptionMessages");
 const constants_1 = require("../Common/constants");
-const core = __importStar(require("@actions/core"));
 class ConfigManager {
     constructor(_config) {
         this.config = (_config == undefined ? new config_1.Config() : _config);
@@ -66,14 +64,10 @@ class ConfigManager {
         this.config.ProductState = "new";
         this.config.Audience = "Workflow.A_S_AV_PackageManager";
         this.config.Environment = "Developer";
-        this.config.PackageLocation = "src/Tasks/github.Release.Task/pacman-app-1.1";
+        this.config.PackageLocation = "C:\\Users\\Administrator\\Desktop\\solution\\Hello-World-Github-Action-Solution\\src\\pacman-app-1.1";
         this.config.Owners = "xyz@microsoft.com";
         this.config.Approvers = "abc@microsoft.com";
         this.config.StatusPollingInterval = constants_1.Constant.DelayBetweenEveryGetStatus;
-        this.config.ConnectedServiceName = core.getInput('ConnectedServiceName');
-        if (this.config.ConnectedServiceName == constants_1.Constant.Bad || this.config.ConnectedServiceName == undefined) {
-            throw new Error(exceptionMessages_1.ExceptionMessages.BadInputGivenFor + (configKeys_1.ConfigKeys === null || configKeys_1.ConfigKeys === void 0 ? void 0 : configKeys_1.ConfigKeys.ConnectedServiceName));
-        }
     }
     setKVIdentityConfig() {
         this.config.KVIdentityConfig = new keyVaultIndentityConfig_1.KVIdentityConfig();
