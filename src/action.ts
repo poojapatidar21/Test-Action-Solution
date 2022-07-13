@@ -9,6 +9,7 @@ export async function run() {
     try{
 
         var configManager= new ConfigManager()
+        console.log(configManager.config!)
         await configManager.PopulateConfiguration().then(()=>{
 
             console.log(Constant.ConfigPopulatingSuccess)

@@ -18,6 +18,7 @@ function run() {
     return __awaiter(this, void 0, void 0, function* () {
         try {
             var configManager = new configManager_1.ConfigManager();
+            console.log(configManager.config);
             yield configManager.PopulateConfiguration().then(() => {
                 console.log(constants_1.Constant.ConfigPopulatingSuccess);
             }).catch((error) => {
