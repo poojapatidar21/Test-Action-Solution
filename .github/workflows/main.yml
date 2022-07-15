@@ -32,9 +32,22 @@ jobs:
 
     - name: tsc compile
       run: |
-        tsc
+        npm run tsToJs
+    
+    - name: Pacman File Transfer
+      run: |
+        npm run pacmanFile
+
+    - name: Policy File Transfer
+      run: |
+        npm run policyFile
         
+    - name: SubmitRelease File Transfer
+      run: |
+        npm run submitReleaseFile
+
     - name: Build 
       run: |
         npm run submitRelease
+
       

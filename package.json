@@ -1,25 +1,27 @@
 {
-  "name": "hello-world-github-action-solution",
+  "name": "Release-Task",
   "version": "1.0.0",
   "description": "",
   "main": "action.js",
   "scripts": {
     "tsToJs": "tsc",
-    "submitRelease": "node public/action.js"
+    "submitRelease": "node public/action.js",
+    "pacmanFile": "xcopy /s \"./src\\pacman-app-1.1\" \"./public\\pacman-app-1.1\" /Y",
+    "jsonFiles": "xcopy /s \"./src\\Common\\InputJsons\\policy.json\" \"./public\\src\\Common\\InputJsons\" /Y"
+  
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/poojapatidar21/Hello-World-Github-Action-Solution.git"
+    "url": "git+https://github.com/poojapatidar21/Test-Action-Solution.git"
   },
   "author": "Pooja Patidar",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/poojapatidar21/Hello-World-Github-Action-Solution/issues"
+    "url": "https://github.com/poojapatidar21/Test-Action-Solution/issues"
   },
-  "homepage": "https://github.com/poojapatidar21/Hello-World-Github-Action-Solution#readme",
+  "homepage": "https://github.com/poojapatidar21/Test-Action-Solution#readme",
   "dependencies": {
     "@actions/core": "^1.9.0",
-    "@actions/github": "^5.0.3",
     "@azure/identity": "^1.5.2",
     "@azure/keyvault-certificates": "^4.3.0",
     "@azure/keyvault-secrets": "^4.3.0",
@@ -27,6 +29,8 @@
     "@azure/storage-blob": "^12.8.0",
     "@vercel/ncc": "^0.34.0",
     "adm-zip": "^0.5.9",
+    "applicationinsights": "^2.1.8",
+    "azure-pipelines-task-lib": "^4.0.0-preview",
     "bluebird": "^3.7.2",
     "delay": "^5.0.0",
     "fs": "^0.0.1-security",
@@ -42,9 +46,14 @@
     "@types/adm-zip": "^0.5.0",
     "@types/bluebird": "^3.5.36",
     "@types/jsonwebtoken": "^8.5.8",
+    "@types/mocha": "^9.1.1",
     "@types/node": "^18.0.3",
     "@types/request": "^2.48.8",
+    "@types/sinon": "^10.0.12",
     "@types/uuid": "^8.3.4",
-    "@types/xml2js": "^0.4.11"
+    "@types/xml2js": "^0.4.11",
+    "chi": "^0.0.10",
+    "mocha": "^10.0.0",
+    "sinon": "^14.0.0"
   }
 }
