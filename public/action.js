@@ -1,27 +1,4 @@
 "use strict";
-var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    var desc = Object.getOwnPropertyDescriptor(m, k);
-    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
-      desc = { enumerable: true, get: function() { return m[k]; } };
-    }
-    Object.defineProperty(o, k2, desc);
-}) : (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    o[k2] = m[k];
-}));
-var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
-    Object.defineProperty(o, "default", { enumerable: true, value: v });
-}) : function(o, v) {
-    o["default"] = v;
-});
-var __importStar = (this && this.__importStar) || function (mod) {
-    if (mod && mod.__esModule) return mod;
-    var result = {};
-    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
-    __setModuleDefault(result, mod);
-    return result;
-};
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -33,37 +10,18 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.run = void 0;
-const core = __importStar(require("@actions/core"));
 const constants_1 = require("./Common/Configuration/constants");
-const trackingMessages_1 = require("./Common/Logging/trackingMessages");
 const exceptionMessages_1 = require("./Common/Exceptions/exceptionMessages");
-const configValidators_1 = require("./Core/Validators/configValidators");
 const gaterwayCaller_1 = require("./Core/Executers/gaterwayCaller");
-const applicationInsights_1 = require("./Common/Logging/applicationInsights");
 const configManager_1 = require("./Core/Managers/configManager");
 function run() {
     return __awaiter(this, void 0, void 0, function* () {
         try {
-            let appInsightsKey = constants_1.Constant.AppInsightsLoggingKey;
-            var applicationInsights = applicationInsights_1.ApplicationInsights.CreateInstance(appInsightsKey);
             var configManager = new configManager_1.ConfigManager();
             yield configManager.PopulateConfiguration().then(() => {
                 console.log(constants_1.Constant.ConfigPopulatingSuccess);
-                applicationInsights === null || applicationInsights === void 0 ? void 0 : applicationInsights.LogTrace(configManager.config.RequestCorrelationId, trackingMessages_1.TrackingMessages.ConfigUpdateSuccess, trackingMessages_1.TrackingMessages.ActionFile);
             }).catch((error) => {
                 console.log(exceptionMessages_1.ExceptionMessages.ConfigCreationFailed);
-                applicationInsights === null || applicationInsights === void 0 ? void 0 : applicationInsights.LogException(configManager.config.RequestCorrelationId, trackingMessages_1.TrackingMessages.ConfigUpdateException, error, trackingMessages_1.TrackingMessages.ActionFile);
-                throw error;
-            });
-            var validator = new configValidators_1.Validator();
-            yield validator.ValidateConfig(configManager.config).then((response) => {
-                if (response == true) {
-                    console.log(constants_1.Constant.ConfigValidationSuccess);
-                    applicationInsights === null || applicationInsights === void 0 ? void 0 : applicationInsights.LogTrace(configManager.config.RequestCorrelationId, trackingMessages_1.TrackingMessages.ConfigValidationSuccess, trackingMessages_1.TrackingMessages.ActionFile);
-                }
-            }).catch((error) => {
-                console.log(exceptionMessages_1.ExceptionMessages.ConfigValidationFailed);
-                applicationInsights === null || applicationInsights === void 0 ? void 0 : applicationInsights.LogException(configManager.config.RequestCorrelationId, trackingMessages_1.TrackingMessages.ConfigValidationException, error, trackingMessages_1.TrackingMessages.ActionFile);
                 throw error;
             });
             var gatewayCommunicator = new gaterwayCaller_1.GatewayCaller(configManager.config);
@@ -72,7 +30,6 @@ function run() {
                 operationId = responseId;
             }).catch((error) => {
                 console.log(exceptionMessages_1.ExceptionMessages.GatewayCallingExecutionFailed);
-                applicationInsights === null || applicationInsights === void 0 ? void 0 : applicationInsights.LogException(configManager.config.RequestCorrelationId, trackingMessages_1.TrackingMessages.GatewayCallingExecutionException, error, trackingMessages_1.TrackingMessages.ActionFile);
                 var finalError = new Error();
                 try {
                     let err = error;
@@ -85,7 +42,6 @@ function run() {
             });
             yield gatewayCommunicator.GatewayPolling(operationId).then().catch((error) => {
                 console.log(exceptionMessages_1.ExceptionMessages.GatewayPollingExecutionFailed);
-                applicationInsights === null || applicationInsights === void 0 ? void 0 : applicationInsights.LogException(configManager.config.RequestCorrelationId, trackingMessages_1.TrackingMessages.GatewayPollingExecutionException, error, trackingMessages_1.TrackingMessages.ActionFile);
                 var finalError = new Error();
                 try {
                     let err = error;
@@ -96,11 +52,9 @@ function run() {
                 }
                 throw finalError;
             });
-            console.log(constants_1.Constant.HappyPathSuccessExecutionMessage);
         }
         catch (error) {
             console.log(exceptionMessages_1.ExceptionMessages.ExecutionFailed);
-            console.log('CorrelationId: ' + configManager.config.RequestCorrelationId);
             try {
                 let err = error;
                 console.log(err.message);
@@ -108,7 +62,6 @@ function run() {
             catch (er) {
                 console.log(error);
             }
-            core.setFailed(constants_1.Constant.FailurePathExecutionMessage);
         }
     });
 }

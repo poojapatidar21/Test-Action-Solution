@@ -49,12 +49,13 @@ export class MessageCreator implements IMessageCreator {
     private async FetchProductInfo(workFlow: string) : Promise<GatewayClient.MSEssGatewayClientContractsReleaseProductInfo> {
 
         let productInfo = new GatewayClient.MSEssGatewayClientContractsReleaseProductInfo 
-
+        
         if(workFlow == Constant.MavenType.toLowerCase()) {
 
             console.log(Constant.FileContentManipulationStarted) 
 
-            let pomFileLocation = this.config.PackageLocation 
+            let pomFileLocation = this.config.PackageLocation
+            
             const readDirMain = await fs.promises.readdir(pomFileLocation!) 
             let pomFileName = readDirMain.filter(el => path.extname(el) == Constant.PomFileExtension) 
             if(pomFileName.length == 0) {
@@ -103,8 +104,9 @@ export class MessageCreator implements IMessageCreator {
     public async PopulateReleaseRequestMessage(containerSas: URL) : Promise<GatewayClient.MSEssGatewayClientContractsReleaseRequestReleaseRequestMessage> {
     
         var policyFile = fs.readFileSync(path.join(__dirname, Constant.PolicyJsonFilePath)).toString() 
+        
         let policyobject : GatewayClient.MSEssGatewayClientContractsRoutingInfo = JSON.parse(policyFile) 
-    
+        
         var pr = fs.readFileSync(path.join(__dirname, Constant.SubmitReleaseJsonFilePath)).toString() 
         let request: GatewayClient.MSEssGatewayClientContractsReleaseRequestReleaseRequestMessage = JSON.parse(pr) 
         request.esrpCorrelationId = this.config.RequestCorrelationId 
@@ -116,7 +118,7 @@ export class MessageCreator implements IMessageCreator {
         request.routingInfo.contentOrigin = this.config!.ContentOrigin?.toLowerCase() 
         request.routingInfo.productState = this.config!.ProductState?.toLowerCase() 
         request.releaseInfo!.properties!.releaseContentType = this.config!.ContentType!.toLowerCase() 
-    
+        
         let productInfo = await this.FetchProductInfo(this.config!.ContentType!.toLowerCase()).then() 
         
         request.productInfo = productInfo 

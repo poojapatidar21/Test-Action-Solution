@@ -55,7 +55,6 @@ class GatewayCaller {
             var containerSas = yield this.FetchContainerSas().then();
             var oAuth = new GatewayClient.OAuth();
             oAuth.accessToken = (_a = this.authContext) === null || _a === void 0 ? void 0 : _a.accessToken;
-            console.log(oAuth.accessToken);
             var releaseApi = new GatewayClient.ReleaseApi();
             releaseApi.setDefaultAuthentication(oAuth);
             releaseApi.basePath = this.config.ServiceEndpointUrl;

@@ -28,15 +28,14 @@ export class GatewayCaller {
         var containerSas = await this.FetchContainerSas().then() 
         var oAuth = new GatewayClient.OAuth() 
         oAuth.accessToken = this.authContext?.accessToken! 
-        console.log(oAuth.accessToken)
         var releaseApi = new GatewayClient.ReleaseApi() 
         releaseApi.setDefaultAuthentication(oAuth) 
         releaseApi.basePath = this.config!.ServiceEndpointUrl! 
-    
+       
         var request = new GatewayClient.MSEssGatewayClientContractsReleaseRequestReleaseRequestMessage 
-
-        request = await this.messageCreator!.PopulateReleaseRequestMessage(containerSas).then() 
-    
+        
+        request= await this.messageCreator!.PopulateReleaseRequestMessage(containerSas).then()
+        
         console.log(Constant.GatewayRequestMessage)
         request.version = Constant.VersionNumber2 
     

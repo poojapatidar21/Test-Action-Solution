@@ -37,6 +37,7 @@ export class ConfigManager{
         this.config.ContentOrigin = core.getInput(ConfigKeys.ContentOrigin)
         this.config.ProductState = core.getInput(ConfigKeys.ProductState)
         this.config.Audience = core.getInput(ConfigKeys.Audience)
+        this.config.PackageLocation=core.getInput(ConfigKeys.PackageLocation);
         this.config.Environment = core.getInput(ConfigKeys.Environment);
         this.config.Owners = core.getInput(ConfigKeys.Owners);
         this.config.Approvers = core.getInput(ConfigKeys.Approvers);
