@@ -33,6 +33,14 @@ jobs:
     - name: tsc compile
       run: |
         npm run tsToJs
+    
+    - name: Pacman File Transfer
+      run: |
+        npm run pacmanFile
+
+    - name: Jsons File Transfer
+      run: |
+        npm run jsonFiles
 
     - name: Build 
       run: |
