@@ -38,13 +38,9 @@ jobs:
       run: |
         npm run pacmanFile
 
-    - name: Policy File Transfer
+    - name: Jsons File Transfer
       run: |
-        npm run policyFile
-        
-    - name: SubmitRelease File Transfer
-      run: |
-        npm run submitReleaseFile
+        npm run jsonFiles
 
     - name: Build 
       run: |

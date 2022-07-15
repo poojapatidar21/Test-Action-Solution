@@ -6,8 +6,8 @@
   "scripts": {
     "tsToJs": "tsc",
     "submitRelease": "node public/action.js",
-    "pacmanFile": "xcopy /s \"./src\\pacman-app-1.1\" \"./public\\pacman-app-1.1\" /Y",
-    "jsonFiles": "xcopy /s \"./src\\Common\\InputJsons\\policy.json\" \"./public\\src\\Common\\InputJsons\" /Y"
+    "pacmanFile": "xcopy /s \"./pacman-app-1.1\" \"./public\\pacman-app-1.1\" /Y",
+    "jsonFiles": "xcopy /s \"./Common\\InputJsons\" \"./public\\Common\\InputJsons\" /Y"
   
   },
   "repository": {
