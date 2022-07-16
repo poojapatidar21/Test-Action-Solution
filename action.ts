@@ -73,6 +73,7 @@ export async function run(this: any) {
 
             console.log(error);
         }
+        core.setFailed(Constant.FailurePathExecutionMessage) ;
     }
 }
 
