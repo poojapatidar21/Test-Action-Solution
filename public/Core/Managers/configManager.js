@@ -43,7 +43,7 @@ const certConverter_1 = require("../../Common/Utilities/certConverter");
 const keyVaultUtility = __importStar(require("../../Common/Utilities/keyVaultUtility"));
 const exceptionMessages_1 = require("../../Common/Exceptions/exceptionMessages");
 const constants_1 = require("../../Common/Configuration/constants");
-const tl = require("azure-pipelines-task-lib/task");
+const core = __importStar(require("@actions/core"));
 const path_1 = __importDefault(require("path"));
 class ConfigManager {
     constructor(_config) {
@@ -60,22 +60,22 @@ class ConfigManager {
         });
     }
     setConfigVariables() {
-        this.config.DomainTenantId = tl.getInput(configKeys_1.ConfigKeys.DomainTenantId);
-        this.config.ServiceEndpointUrl = tl.getInput(configKeys_1.ConfigKeys.ServiceEndpointUrl);
+        this.config.DomainTenantId = core.getInput(configKeys_1.ConfigKeys.DomainTenantId);
+        this.config.ServiceEndpointUrl = core.getInput(configKeys_1.ConfigKeys.ServiceEndpointUrl);
         this.config.AppInsightsLoggingKey = constants_1.Constant.AppInsightsLoggingKey;
-        this.config.MainPublisher = tl.getInput(configKeys_1.ConfigKeys.MainPublisher);
-        this.config.Intent = tl.getInput(configKeys_1.ConfigKeys.Intent);
-        this.config.ContentType = tl.getInput(configKeys_1.ConfigKeys.ContentType);
-        this.config.ContentOrigin = tl.getInput(configKeys_1.ConfigKeys.ContentOrigin);
-        this.config.ProductState = tl.getInput(configKeys_1.ConfigKeys.ProductState);
-        this.config.Audience = tl.getInput(configKeys_1.ConfigKeys.Audience);
-        this.config.Environment = tl.getInput(configKeys_1.ConfigKeys.Environment);
-        this.config.PackageLocation = tl.getInput(configKeys_1.ConfigKeys.PackageLocation);
-        this.config.Owners = tl.getInput(configKeys_1.ConfigKeys.Owners);
-        this.config.Approvers = tl.getInput(configKeys_1.ConfigKeys.Approvers);
+        this.config.MainPublisher = core.getInput(configKeys_1.ConfigKeys.MainPublisher);
+        this.config.Intent = core.getInput(configKeys_1.ConfigKeys.Intent);
+        this.config.ContentType = core.getInput(configKeys_1.ConfigKeys.ContentType);
+        this.config.ContentOrigin = core.getInput(configKeys_1.ConfigKeys.ContentOrigin);
+        this.config.ProductState = core.getInput(configKeys_1.ConfigKeys.ProductState);
+        this.config.Audience = core.getInput(configKeys_1.ConfigKeys.Audience);
+        this.config.PackageLocation = core.getInput(configKeys_1.ConfigKeys.PackageLocation);
+        this.config.Environment = core.getInput(configKeys_1.ConfigKeys.Environment);
+        this.config.Owners = core.getInput(configKeys_1.ConfigKeys.Owners);
+        this.config.Approvers = core.getInput(configKeys_1.ConfigKeys.Approvers);
         this.config.StatusPollingInterval = constants_1.Constant.DelayBetweenEveryGetStatus;
-        tl.setResourcePath(path_1.default.join(__dirname, constants_1.Constant.TaskJsonDistanceFromManagerFolder));
-        this.config.ConnectedServiceName = tl.getInput(configKeys_1.ConfigKeys.ConnectedServiceName, true);
+        core.addPath(path_1.default.join(__dirname, constants_1.Constant.TaskJsonDistanceFromManagerFolder));
+        this.config.ConnectedServiceName = core.getInput(configKeys_1.ConfigKeys.ConnectedServiceName);
         if (this.config.ConnectedServiceName == constants_1.Constant.Bad || this.config.ConnectedServiceName == undefined) {
             throw new Error(exceptionMessages_1.ExceptionMessages.BadInputGivenFor + (configKeys_1.ConfigKeys === null || configKeys_1.ConfigKeys === void 0 ? void 0 : configKeys_1.ConfigKeys.ConnectedServiceName));
         }
@@ -83,21 +83,21 @@ class ConfigManager {
     setKVIdentityConfig() {
         this.config.KVIdentityConfig = new keyVaultIndentityConfig_1.KVIdentityConfig();
         if (this.config.Environment != undefined && this.config.Environment == constants_1.Constant.Developer) {
-            this.config.KVIdentityConfig.ClientId = tl.getInput(configKeys_1.ConfigKeys.KvClientId, true);
-            this.config.KVIdentityConfig.TenantId = tl.getInput(configKeys_1.ConfigKeys.KvTenantId, true);
-            this.config.KVIdentityConfig.KeyVaultName = tl.getInput(configKeys_1.ConfigKeys.KvKeyVaultName, true);
-            this.config.KVIdentityConfig.AuthCertName = tl.getInput(configKeys_1.ConfigKeys.KvAuthCertName, true);
-            this.config.KVIdentityConfig.SignCertName = tl.getInput(configKeys_1.ConfigKeys.KvSignCertName, true);
-            this.config.KVIdentityConfig.ClientSecret = tl.getInput(configKeys_1.ConfigKeys.KvSecret, true);
+            this.config.KVIdentityConfig.ClientId = core.getInput(configKeys_1.ConfigKeys.KvClientId);
+            this.config.KVIdentityConfig.TenantId = core.getInput(configKeys_1.ConfigKeys.KvTenantId);
+            this.config.KVIdentityConfig.KeyVaultName = core.getInput(configKeys_1.ConfigKeys.KvKeyVaultName);
+            this.config.KVIdentityConfig.AuthCertName = core.getInput(configKeys_1.ConfigKeys.KvAuthCertName);
+            this.config.KVIdentityConfig.SignCertName = core.getInput(configKeys_1.ConfigKeys.KvSignCertName);
+            this.config.KVIdentityConfig.ClientSecret = core.getInput(configKeys_1.ConfigKeys.KvSecret);
         }
         else {
             try {
-                this.config.KVIdentityConfig.ClientId = tl.getEndpointAuthorizationParameter(this.config.ConnectedServiceName, configKeys_1.ConfigKeys.Username, true);
-                this.config.KVIdentityConfig.ClientSecret = tl.getEndpointAuthorizationParameter(this.config.ConnectedServiceName, configKeys_1.ConfigKeys.Password, true);
-                this.config.KVIdentityConfig.TenantId = tl.getEndpointAuthorizationParameter(this.config.ConnectedServiceName, configKeys_1.ConfigKeys.TenantId, true);
-                this.config.KVIdentityConfig.KeyVaultName = tl.getEndpointAuthorizationParameter(this.config.ConnectedServiceName, configKeys_1.ConfigKeys.KeyVaultName, true);
-                this.config.KVIdentityConfig.AuthCertName = tl.getEndpointAuthorizationParameter(this.config.ConnectedServiceName, configKeys_1.ConfigKeys.AuthCertName, true);
-                this.config.KVIdentityConfig.SignCertName = tl.getEndpointAuthorizationParameter(this.config.ConnectedServiceName, configKeys_1.ConfigKeys.SignCertName, true);
+                this.config.KVIdentityConfig.TenantId = process.env['KVTENANTID'];
+                this.config.KVIdentityConfig.KeyVaultName = process.env['KVNAME'];
+                this.config.KVIdentityConfig.AuthCertName = process.env['AUTHCERTNAME'];
+                this.config.KVIdentityConfig.SignCertName = process.env['SIGNCERTNAME'];
+                this.config.KVIdentityConfig.ClientId = process.env["KVAUTHCLIENT"];
+                this.config.KVIdentityConfig.ClientSecret = process.env["KVAUTHSECRET"];
             }
             catch (error) {
                 console.log(exceptionMessages_1.ExceptionMessages.KVConfigSetUpError);
