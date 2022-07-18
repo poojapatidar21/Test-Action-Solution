@@ -1,5 +1,5 @@
 {
-  "name": "Release-Task",
+  "name": "releasetask",
   "version": "1.0.0",
   "description": "",
   "main": "action.js",
@@ -21,7 +21,6 @@
   },
   "homepage": "https://github.com/poojapatidar21/Test-Action-Solution#readme",
   "dependencies": {
-    "@actions/core": "^1.9.0",
     "@azure/identity": "^1.5.2",
     "@azure/keyvault-certificates": "^4.3.0",
     "@azure/keyvault-secrets": "^4.3.0",

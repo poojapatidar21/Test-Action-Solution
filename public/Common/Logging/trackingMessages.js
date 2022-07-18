@@ -11,7 +11,7 @@ exports.TrackingMessages = {
     ConfigPopulationCalling: "Started the population of the configuration in index file.",
     TaskStarted: "Task execution started in index file.",
     ConfigUpdateSuccess: "ConfigUpdateSuccessTrace",
-    ActionFile: "action.js",
+    ActionFile: "public/action.js",
     ConfigUpdateException: "ConfigUpdateException",
     ConfigValidationSuccess: "ConfigValidationSuccess",
     ConfigValidationException: "ConfigValidationException",

@@ -17,7 +17,7 @@ export const Constant = {
     Success: "success",
     GatewayOperationsSuccess: "ESRP Release Gateway submission and polling task completed. \n",
     HappyPathSuccessExecutionMessage: "Task completed, Reach out to <esrpreldri@microsoft.com> for assistance. \n",
-    FailurePathExecutionMessage: "Task failed, Please see the error details and reach out to <esrpreldri@microsoft.com> for further assistance. \n",
+    FailurePathExecutionMessage: "Task failed, Please see the error details and reach out to ESRP Release DRI via IcM(https://aka.ms/CreateIncidentOnESRPRelease) for further assistance. \n",
     ConfigValidationSuccess: "Config Values Validated successfully. \n",
     ConfigPopulatingSuccess: "Config Values Populated successfully. \n",
     GatewayRequestMessage: "ESRP Release Gateway Request Message Sent. \n",
@@ -55,5 +55,6 @@ export const Constant = {
     ArtifactId: "artifactId",
     Version: 'version',
     ReleaseUIAccessMessage: 'Status can be checked here as well - https://releaseui-wus-esrp-prod.azurewebsites.net/Release/Search/#',
-    DescriptionMandatoryMessage: "Description is not present and is a mandatory field, adding product name to description \n"
+    DescriptionMandatoryMessage: "Description is not present and is a mandatory field, adding product name to description \n",
+    MaxDescriptionLength: 500
 }

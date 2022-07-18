@@ -1,5 +1,4 @@
-
-import * as core from '@actions/core'
+import tl = require('azure-pipelines-task-lib/task');
 import http = require('http');
 import { MSEssGatewayClientContractsOperationResponse, MSEssGatewayClientContractsReleaseResponseReleaseDetailsMessage } from "./Common/GatewayApiSpec/api";
 import { Constant } from "./Common/Configuration/constants";
@@ -13,25 +12,46 @@ import { ConfigManager } from './Core/Managers/configManager';
 export async function run(this: any) {
 
     try {
+
+        let appInsightsKey = Constant.AppInsightsLoggingKey;
+        var applicationInsights = ApplicationInsights.CreateInstance(appInsightsKey);
         
         var configManager = new ConfigManager();
         await configManager.PopulateConfiguration().then(() => {
 
             console.log(Constant.ConfigPopulatingSuccess);
-        }).catch((error: any) => {
+            applicationInsights?.LogTrace(configManager.config!.RequestCorrelationId!, TrackingMessages.ConfigUpdateSuccess, TrackingMessages.ActionFile);
+        }).catch((error) => {
 
             console.log(ExceptionMessages.ConfigCreationFailed);
+            applicationInsights?.LogException(configManager.config!.RequestCorrelationId!, TrackingMessages.ConfigUpdateException, error, TrackingMessages.ActionFile);
+            throw error;
+        });
+            
+        var validator = new Validator();
+        await validator.ValidateConfig(configManager.config!).then((response) => {
+
+            if(response == true) {
+
+                console.log(Constant.ConfigValidationSuccess);
+                applicationInsights?.LogTrace(configManager.config!.RequestCorrelationId!, TrackingMessages.ConfigValidationSuccess, TrackingMessages.ActionFile);
+            }
+        }).catch((error) => {
+
+            console.log(ExceptionMessages.ConfigValidationFailed);
+            applicationInsights?.LogException(configManager.config!.RequestCorrelationId!, TrackingMessages.ConfigValidationException, error, TrackingMessages.ActionFile);
             throw error;
         });
 
         var gatewayCommunicator = new GatewayCaller(configManager.config!);
         let operationId = "";
-        await gatewayCommunicator.GatewayCalling().then((responseId: string) => {
+        await gatewayCommunicator.GatewayCalling().then((responseId) => {
 
             operationId = responseId;
-        }).catch ((error: any) => {
+        }).catch ((error) => {
 
             console.log(ExceptionMessages.GatewayCallingExecutionFailed);
+            applicationInsights?.LogException(configManager.config!.RequestCorrelationId!, TrackingMessages.GatewayCallingExecutionException, error, TrackingMessages.ActionFile);
             var finalError = new Error();
             try {
 
@@ -44,9 +64,10 @@ export async function run(this: any) {
             }
             throw finalError;
         });
-        await gatewayCommunicator.GatewayPolling(operationId).then().catch((error: any) => {
+        await gatewayCommunicator.GatewayPolling(operationId).then().catch((error) => {
 
             console.log(ExceptionMessages.GatewayPollingExecutionFailed);
+            applicationInsights?.LogException(configManager.config!.RequestCorrelationId!, TrackingMessages.GatewayPollingExecutionException, error, TrackingMessages.ActionFile);
             var finalError = new Error();
             try {
 
@@ -60,10 +81,13 @@ export async function run(this: any) {
             throw finalError;
         });
 
+        tl.setResult(tl.TaskResult.Succeeded, Constant.HappyPathSuccessExecutionMessage, true);
+
     }
     catch (error) {
 
         console.log(ExceptionMessages.ExecutionFailed);
+        console.log('CorrelationId: ' + configManager!.config!.RequestCorrelationId);
         try {
 
             let err = error as Error;
@@ -73,6 +97,7 @@ export async function run(this: any) {
 
             console.log(error);
         }
+        tl.setResult(tl.TaskResult.Failed, Constant.FailurePathExecutionMessage, true);
     }
 }
 

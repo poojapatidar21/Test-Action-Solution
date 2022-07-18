@@ -4,64 +4,58 @@ import Msal =require('@azure/msal-node')
 import { ExceptionMessages } from "../../Common/Exceptions/exceptionMessages" 
 import { Constant } from "../../Common/Configuration/constants" 
 
-export class AuthenticationManager implements IAuthenticationManager{
-    accessToken?: string
-    config?:IConfig
-    SNIPinningFlag?:string
+export class AuthenticationManager implements IAuthenticationManager {
+    
+    accessToken?: string;
+    config?: IConfig;
+    SNIPinningFlag: string;
 
-    public constructor(_config:IConfig){
-        this.config=_config
-        this.accessToken=undefined
-        this.SNIPinningFlag='true'
+    public constructor(_config: IConfig) {
+
+        this.config = _config;
+        this.accessToken = undefined;
+        this.SNIPinningFlag = 'true';
     }
+    
+    public async setAccessToken() : Promise<string | undefined> {
+        
+        var authorityHostUrl = Constant.AuthorityHostUrl;
+        var tenant = this.config?.DomainTenantId;
+        var authorityUrl = authorityHostUrl + '/' + tenant;
+        var resourceUri = this.config!.ServiceEndpointUrl;
+    
+        const clientConfig = {
 
-    public async setAccessToken(): Promise<string | undefined> {
-        var authorityHostUrl = Constant.AuthorityHostUrl
-        var tenant = this.config?.DomainTenantId
-        var authorityUrl= authorityHostUrl + '/' + tenant
-        var resourceUri = this.config!.ServiceEndpointUrl
+            auth: {
 
-        const clientConfig={
+                clientId: this.config!.ClientId!,
+                authority: authorityUrl,
+                clientCertificate: {
 
-            auth:{
-
-                clientId:this.config!.ClientId!,
-
-                authority:authorityUrl,
-
-                clientCertificate:{
-
-                    thumbprint:this.config!.AuthCertThumbprint!,
-
-                    privateKey:this.config!.AuthPrivateKey!,
-
-                    x5c:this.SNIPinningFlag
-
-                 }
-
+                    thumbprint: this.config!.AuthCertThumbprint!,
+                    privateKey: this.config!.AuthPrivateKey!,
+                    x5c: this.SNIPinningFlag
+                }
             }
-
-        }
-       
-        const cca = new Msal.ConfidentialClientApplication(clientConfig) 
-       
-        var gatewayScope = resourceUri + Constant.APIAccessDefaultScope 
+        };
+        
+        
+        const cca = new Msal.ConfidentialClientApplication(clientConfig);
+        var gatewayScope = resourceUri + Constant.APIAccessDefaultScope;
         const clientCredentialRequest = {
 
             scopes: [gatewayScope]
-        } 
+        };
     
         await cca.acquireTokenByClientCredential(clientCredentialRequest).then((response) => {
 
-            this.accessToken = response?.accessToken! 
+            this.accessToken = response?.accessToken!;
         }).catch((error) => {
 
-            console.log(ExceptionMessages.TokenAcquiringError) 
-            throw error 
-        }) 
+            console.log(ExceptionMessages.TokenAcquiringError);
+            throw error;
+        });
 
-        return Constant.Success 
+        return Constant.Success;
     }
-
-
 }

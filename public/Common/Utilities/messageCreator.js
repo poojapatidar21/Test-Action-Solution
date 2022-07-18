@@ -68,6 +68,7 @@ class MessageCreator {
         return validityTime;
     }
     FetchProductInfo(workFlow) {
+        var _a;
         return __awaiter(this, void 0, void 0, function* () {
             let productInfo = new GatewayClient.MSEssGatewayClientContractsReleaseProductInfo;
             if (workFlow == constants_1.Constant.MavenType.toLowerCase()) {
@@ -104,6 +105,9 @@ class MessageCreator {
                 productInfo.description = constants_1.Constant.DefaultDescription;
                 productInfo.name = constants_1.Constant.DefaultName;
                 productInfo.version = constants_1.Constant.DefaultVersion;
+            }
+            if (productInfo.description.length >= constants_1.Constant.MaxDescriptionLength) {
+                productInfo.description = (_a = productInfo.description) === null || _a === void 0 ? void 0 : _a.substring(0, constants_1.Constant.MaxDescriptionLength);
             }
             return productInfo;
         });

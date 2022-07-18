@@ -98,7 +98,11 @@ export class MessageCreator implements IMessageCreator {
             productInfo.version = Constant.DefaultVersion 
         }
 
-        return productInfo 
+        if(productInfo.description!.length >= Constant.MaxDescriptionLength) {
+            productInfo.description = productInfo.description?.substring(0, Constant.MaxDescriptionLength);
+        }
+
+        return productInfo
     }
 
     public async PopulateReleaseRequestMessage(containerSas: URL) : Promise<GatewayClient.MSEssGatewayClientContractsReleaseRequestReleaseRequestMessage> {
