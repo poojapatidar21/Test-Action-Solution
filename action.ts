@@ -1,4 +1,4 @@
-import tl = require('azure-pipelines-task-lib/task');
+import * as core from '@actions/core'
 import http = require('http');
 import { MSEssGatewayClientContractsOperationResponse, MSEssGatewayClientContractsReleaseResponseReleaseDetailsMessage } from "./Common/GatewayApiSpec/api";
 import { Constant } from "./Common/Configuration/constants";
@@ -81,7 +81,7 @@ export async function run(this: any) {
             throw finalError;
         });
 
-        tl.setResult(tl.TaskResult.Succeeded, Constant.HappyPathSuccessExecutionMessage, true);
+        console.log(Constant.HappyPathSuccessExecutionMessage);
 
     }
     catch (error) {
@@ -97,7 +97,7 @@ export async function run(this: any) {
 
             console.log(error);
         }
-        tl.setResult(tl.TaskResult.Failed, Constant.FailurePathExecutionMessage, true);
+       core.setFailed( Constant.FailurePathExecutionMessage);
     }
 }
 

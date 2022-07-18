@@ -8,7 +8,6 @@
     "submitRelease": "node public/action.js",
     "pacmanFile": "xcopy /s \"./pacman-app-1.1\" \"./public\\pacman-app-1.1\" /Y",
     "jsonFiles": "xcopy /s \"./Common\\InputJsons\" \"./public\\Common\\InputJsons\" /Y"
-  
   },
   "repository": {
     "type": "git",
@@ -21,6 +20,7 @@
   },
   "homepage": "https://github.com/poojapatidar21/Test-Action-Solution#readme",
   "dependencies": {
+    "@actions/core": "^1.9.0",
     "@azure/identity": "^1.5.2",
     "@azure/keyvault-certificates": "^4.3.0",
     "@azure/keyvault-secrets": "^4.3.0",
