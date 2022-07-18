@@ -72,7 +72,6 @@ export async function run(this: any) {
             try {
 
                 let err = error as { response: http.IncomingMessage; body: MSEssGatewayClientContractsReleaseResponseReleaseDetailsMessage };
-                console.log(error)
                 finalError = new Error(err.response.statusCode + '--' + err.response.statusMessage);
             }
             catch (er) {

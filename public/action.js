@@ -89,7 +89,6 @@ function run() {
                 var finalError = new Error();
                 try {
                     let err = error;
-                    console.log(error);
                     finalError = new Error(err.response.statusCode + '--' + err.response.statusMessage);
                 }
                 catch (er) {

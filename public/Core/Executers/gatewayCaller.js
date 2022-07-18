@@ -79,7 +79,6 @@ class GatewayCaller {
             while (true) {
                 console.log(constants_1.Constant.ReleaseDetailsFetchingMessage);
                 var releaseResponse = yield releaseApi.releaseGetReleaseDetailsByReleaseIdAsync(operationId === null || operationId === void 0 ? void 0 : operationId.toString(), this.config.ClientId, constants_1.Constant.VersionNumber2);
-                // console.log(releaseResponse)
                 var responseStatus = releaseResponse.body.status;
                 if (this.IsTerminalReached(responseStatus) == true) {
                     console.log(operationId + constants_1.Constant.HasReachedTerminalState + (responseStatus === null || responseStatus === void 0 ? void 0 : responseStatus.toString()) + '\n');
