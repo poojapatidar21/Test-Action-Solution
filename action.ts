@@ -5,7 +5,7 @@ import { Constant } from "./Common/Configuration/constants";
 import { TrackingMessages } from "./Common/Logging/trackingMessages";
 import { ExceptionMessages } from "./Common/Exceptions/exceptionMessages";
 import { Validator } from "./Core/Validators/configValidators";
-import { GatewayCaller } from "./Core/Executers/gaterwayCaller";
+import { GatewayCaller } from "./Core/Executers/gatewayCaller";
 import { ApplicationInsights } from './Common/Logging/applicationInsights';
 import { ConfigManager } from './Core/Managers/configManager';
 
@@ -72,6 +72,7 @@ export async function run(this: any) {
             try {
 
                 let err = error as { response: http.IncomingMessage; body: MSEssGatewayClientContractsReleaseResponseReleaseDetailsMessage };
+                console.log(error)
                 finalError = new Error(err.response.statusCode + '--' + err.response.statusMessage);
             }
             catch (er) {

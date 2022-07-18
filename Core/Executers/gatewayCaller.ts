@@ -60,7 +60,7 @@ export class GatewayCaller {
 
             console.log(Constant.ReleaseDetailsFetchingMessage) 
             var releaseResponse = await releaseApi.releaseGetReleaseDetailsByReleaseIdAsync(operationId?.toString() as string, this.config!.ClientId!, Constant.VersionNumber2) 
-
+            // console.log(releaseResponse)
             var responseStatus = releaseResponse.body.status 
 
             if (this.IsTerminalReached(responseStatus!) == true) {

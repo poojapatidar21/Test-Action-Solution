@@ -38,7 +38,7 @@ const constants_1 = require("./Common/Configuration/constants");
 const trackingMessages_1 = require("./Common/Logging/trackingMessages");
 const exceptionMessages_1 = require("./Common/Exceptions/exceptionMessages");
 const configValidators_1 = require("./Core/Validators/configValidators");
-const gaterwayCaller_1 = require("./Core/Executers/gaterwayCaller");
+const gatewayCaller_1 = require("./Core/Executers/gatewayCaller");
 const applicationInsights_1 = require("./Common/Logging/applicationInsights");
 const configManager_1 = require("./Core/Managers/configManager");
 function run() {
@@ -66,7 +66,7 @@ function run() {
                 applicationInsights === null || applicationInsights === void 0 ? void 0 : applicationInsights.LogException(configManager.config.RequestCorrelationId, trackingMessages_1.TrackingMessages.ConfigValidationException, error, trackingMessages_1.TrackingMessages.ActionFile);
                 throw error;
             });
-            var gatewayCommunicator = new gaterwayCaller_1.GatewayCaller(configManager.config);
+            var gatewayCommunicator = new gatewayCaller_1.GatewayCaller(configManager.config);
             let operationId = "";
             yield gatewayCommunicator.GatewayCalling().then((responseId) => {
                 operationId = responseId;
@@ -89,6 +89,7 @@ function run() {
                 var finalError = new Error();
                 try {
                     let err = error;
+                    console.log(error);
                     finalError = new Error(err.response.statusCode + '--' + err.response.statusMessage);
                 }
                 catch (er) {
