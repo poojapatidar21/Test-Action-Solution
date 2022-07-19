@@ -29,4 +29,5 @@ If you have not completed the above, please go back and follow the instructions 
 The following are the detailed steps with embedded screenshots to provide additional clarification if required.  
 1. Install the github Action 
 Click on Marketplace and search [Github Action](https://github.com/marketplace/actions/test-action-solution)
-![Marketplace](Sreenshots/Marketplace.png?raw=true)
+
+<img width="500" alt="Marketplace" src="Screenshots/Marketplace.png">
