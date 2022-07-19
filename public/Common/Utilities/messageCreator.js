@@ -76,7 +76,6 @@ class MessageCreator {
                 let pomFileLocation = this.config.PackageLocation;
                 const readDirMain = yield fs.promises.readdir(pomFileLocation);
                 let pomFileName = readDirMain.filter(el => path.extname(el) == constants_1.Constant.PomFileExtension);
-                console.log(pomFileName);
                 if (pomFileName.length == 0) {
                     throw new Error(exceptionMessages_1.ExceptionMessages.NoPOMFileExistsError + constants_1.Constant.PomFileExtension);
                 }

@@ -32,22 +32,6 @@ jobs:
       run: |
         npm run tsToJs
 
-    - name: Inputs given
-      uses: poojapatidar21/Test-Action-Solution@test-1-4
-      with: 
-            ConnectedServiceName: "testReleaseServiceConnection"
-            Intent: "PackageDistribution"
-            ContentType: "Maven"
-            PackageLocation: "ValidArtefacts"
-            Owners: "arugupta@microsoft.com"
-            Approvers: "shmallip@microsoft.com,skonidena@microsoft.com"
-            ServiceEndpointUrl: "https://api.esrp.microsoft.com"
-            MainPublisher: "ESRPRELPACMANTEST"
-            DomainTenantId: "72f988bf-86f1-41af-91ab-2d7cd011db47"
-            ContentOrigin: "azeus"
-            ProductState: "new"
-            Audience: "Workflow.A_S_AV_PackageManager"
-
     - name: Build 
       run: |
         npm run submitRelease

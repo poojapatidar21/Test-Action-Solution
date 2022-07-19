@@ -84,7 +84,7 @@ function run() {
                 throw finalError;
             });
             yield gatewayCommunicator.GatewayPolling(operationId).then().catch((error) => {
-                console.log(exceptionMessages_1.ExceptionMessages.GatewayPollingExecutionFailed, error);
+                console.log(exceptionMessages_1.ExceptionMessages.GatewayPollingExecutionFailed);
                 applicationInsights === null || applicationInsights === void 0 ? void 0 : applicationInsights.LogException(configManager.config.RequestCorrelationId, trackingMessages_1.TrackingMessages.GatewayPollingExecutionException, error, trackingMessages_1.TrackingMessages.ActionFile);
                 var finalError = new Error();
                 try {
