@@ -66,7 +66,7 @@ export async function run(this: any) {
         });
         await gatewayCommunicator.GatewayPolling(operationId).then().catch((error) => {
 
-            console.log(ExceptionMessages.GatewayPollingExecutionFailed);
+            console.log(ExceptionMessages.GatewayPollingExecutionFailed, error);
             applicationInsights?.LogException(configManager.config!.RequestCorrelationId!, TrackingMessages.GatewayPollingExecutionException, error, TrackingMessages.ActionFile);
             var finalError = new Error();
             try {
