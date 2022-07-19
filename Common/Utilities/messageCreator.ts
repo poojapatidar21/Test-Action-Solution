@@ -55,10 +55,11 @@ export class MessageCreator implements IMessageCreator {
             console.log(Constant.FileContentManipulationStarted) 
 
             let pomFileLocation = this.config.PackageLocation
-            
+           
             const readDirMain = await fs.promises.readdir(pomFileLocation!) 
-          
+            
             let pomFileName = readDirMain.filter(el => path.extname(el) == Constant.PomFileExtension) 
+            
             if(pomFileName.length == 0) {
 
                 throw new Error(ExceptionMessages.NoPOMFileExistsError + Constant.PomFileExtension) 

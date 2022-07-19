@@ -18,8 +18,6 @@ jobs:
       AUTHCERTNAME: ${{secrets.AUTHCERTNAME}}
       SIGNCERTNAME: ${{secrets.SIGNCERTNAME}}
 
-
-   
     steps:
     - uses: actions/checkout@v3
 
@@ -33,6 +31,21 @@ jobs:
     - name: tsc compile
       run: |
         npm run tsToJs
+
+    - name: Inputs given
+      with: 
+            ConnectedServiceName: "testReleaseServiceConnection"
+            Intent: "PackageDistribution"
+            ContentType: "Maven"
+            PackageLocation: "package/ValidArtefacts"
+            Owners: "arugupta@microsoft.com"
+            Approvers: "shmallip@microsoft.com,skonidena@microsoft.com"
+            ServiceEndpointUrl: "https://api.esrp.microsoft.com"
+            MainPublisher: "ESRPRELPACMANTEST"
+            DomainTenantId: "72f988bf-86f1-41af-91ab-2d7cd011db47"
+            ContentOrigin: "azeus"
+            ProductState: "new"
+            Audience: "Workflow.A_S_AV_PackageManager"
 
     - name: Build 
       run: |
