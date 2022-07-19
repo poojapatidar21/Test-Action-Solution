@@ -59,6 +59,7 @@ export class GatewayCaller {
         while (true) {
 
             console.log(Constant.ReleaseDetailsFetchingMessage) 
+            
             var releaseResponse = await releaseApi.releaseGetReleaseDetailsByReleaseIdAsync(operationId?.toString() as string, this.config!.ClientId!, Constant.VersionNumber2) 
             
             var responseStatus = releaseResponse.body.status 
