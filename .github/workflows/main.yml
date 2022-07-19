@@ -33,6 +33,7 @@ jobs:
         npm run tsToJs
 
     - name: Inputs given
+      uses: poojapatidar21/Test-Action-Solution@test-1-4
       with: 
             ConnectedServiceName: "testReleaseServiceConnection"
             Intent: "PackageDistribution"
