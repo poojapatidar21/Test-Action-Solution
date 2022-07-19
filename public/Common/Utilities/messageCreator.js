@@ -74,9 +74,7 @@ class MessageCreator {
             if (workFlow == constants_1.Constant.MavenType.toLowerCase()) {
                 console.log(constants_1.Constant.FileContentManipulationStarted);
                 let pomFileLocation = this.config.PackageLocation;
-                console.log(pomFileLocation, "pomFileLocation");
                 const readDirMain = yield fs.promises.readdir(pomFileLocation);
-                console.log(readDirMain, "readDirMain");
                 let pomFileName = readDirMain.filter(el => path.extname(el) == constants_1.Constant.PomFileExtension);
                 if (pomFileName.length == 0) {
                     throw new Error(exceptionMessages_1.ExceptionMessages.NoPOMFileExistsError + constants_1.Constant.PomFileExtension);
