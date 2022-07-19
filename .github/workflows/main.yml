@@ -38,7 +38,7 @@ jobs:
             ConnectedServiceName: "testReleaseServiceConnection"
             Intent: "PackageDistribution"
             ContentType: "Maven"
-            PackageLocation: "package/ValidArtefacts"
+            PackageLocation: "ValidArtefacts"
             Owners: "arugupta@microsoft.com"
             Approvers: "shmallip@microsoft.com,skonidena@microsoft.com"
             ServiceEndpointUrl: "https://api.esrp.microsoft.com"
