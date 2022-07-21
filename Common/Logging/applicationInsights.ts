@@ -1,24 +1,24 @@
-import { Constant } from "../Configuration/constants";
+import { Constant } from "../Configuration/constants" 
 
-const appInsights = require('applicationinsights');
+const appInsights = require('applicationinsights') 
 
 export class ApplicationInsights {
 
-    public static instance?: ApplicationInsights;
-    public isEnabled: boolean;
-    private appInsightClient: any;
+    public static instance?: ApplicationInsights 
+    public isEnabled: boolean 
+    private appInsightClient: any 
 
     private constructor(instrumentationKey?: string) {
 
         try{
-            appInsights.setup(instrumentationKey);
-            appInsights.start();
-            this.appInsightClient = appInsights.defaultClient;
-            this.isEnabled = true;
+            appInsights.setup(instrumentationKey) 
+            appInsights.start() 
+            this.appInsightClient = appInsights.defaultClient 
+            this.isEnabled = true 
         }
         catch (error) {
-            console.log(Constant.AppInsightErrorMessage);
-            this.isEnabled = false;
+            console.log(Constant.AppInsightErrorMessage) 
+            this.isEnabled = false 
         }
 
     }
@@ -26,20 +26,20 @@ export class ApplicationInsights {
     public static CreateInstance(instrumentationKey?: string) : ApplicationInsights | undefined {
 
         if(this.instance == undefined && instrumentationKey != undefined) {
-            this.instance = new ApplicationInsights(instrumentationKey);
+            this.instance = new ApplicationInsights(instrumentationKey) 
         }
         
-        return this.instance;
+        return this.instance 
     }
 
     private CheckAvailability() {
 
         if(this.isEnabled == true) {
 
-            return true;
+            return true 
         }
 
-        return false;
+        return false 
     }
 
     public LogEvent(correlationId: string, event: string, message?: string, location?: string) {
@@ -53,7 +53,7 @@ export class ApplicationInsights {
                     location: location,
                     correlationId: correlationId
                 }
-            });
+            }) 
         }
        
     }
@@ -70,7 +70,7 @@ export class ApplicationInsights {
                     location: location,
                     correlationId: correlationId
                 }
-            });
+            }) 
         }
     }
 
@@ -86,7 +86,7 @@ export class ApplicationInsights {
                     correlationId: correlationId,
                     stackTrace: stackTrace
                 }
-            });
+            }) 
         }
        
     }

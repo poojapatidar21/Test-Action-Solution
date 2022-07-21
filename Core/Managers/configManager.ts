@@ -42,17 +42,17 @@ export class ConfigManager{
         this.config.ContentOrigin = core.getInput(ConfigKeys.ContentOrigin)
         this.config.ProductState = core.getInput(ConfigKeys.ProductState)
         this.config.Audience = core.getInput(ConfigKeys.Audience)
-        this.config.PackageLocation=core.getInput(ConfigKeys.PackageLocation);
-        this.config.Environment = core.getInput(ConfigKeys.Environment);
-        this.config.Owners = core.getInput(ConfigKeys.Owners);
-        this.config.Approvers = core.getInput(ConfigKeys.Approvers);
-        this.config.StatusPollingInterval = Constant.DelayBetweenEveryGetStatus;
-        core.addPath(path.join(__dirname, Constant.TaskJsonDistanceFromManagerFolder));
-        this.config.ConnectedServiceName = core.getInput(ConfigKeys.ConnectedServiceName);
+        this.config.PackageLocation=core.getInput(ConfigKeys.PackageLocation) 
+        this.config.Environment = core.getInput(ConfigKeys.Environment) 
+        this.config.Owners = core.getInput(ConfigKeys.Owners) 
+        this.config.Approvers = core.getInput(ConfigKeys.Approvers) 
+        this.config.StatusPollingInterval = Constant.DelayBetweenEveryGetStatus 
+        core.addPath(path.join(__dirname, Constant.TaskJsonDistanceFromManagerFolder)) 
+        this.config.ConnectedServiceName = core.getInput(ConfigKeys.ConnectedServiceName) 
 
         if (this.config.ConnectedServiceName == Constant.Bad || this.config.ConnectedServiceName == undefined) {
 
-            throw new Error(ExceptionMessages.BadInputGivenFor + ConfigKeys?.ConnectedServiceName);
+            throw new Error(ExceptionMessages.BadInputGivenFor + ConfigKeys?.ConnectedServiceName) 
         } 
     }
 
@@ -60,12 +60,12 @@ export class ConfigManager{
         this.config.KVIdentityConfig= new KVIdentityConfig()
         
         if (this.config.Environment != undefined && this.config.Environment == Constant.Developer) {
-            this.config.KVIdentityConfig.ClientId = core.getInput(ConfigKeys.KvClientId);
-            this.config.KVIdentityConfig.TenantId = core.getInput(ConfigKeys.KvTenantId );
-            this.config.KVIdentityConfig.KeyVaultName = core.getInput(ConfigKeys.KvKeyVaultName );
-            this.config.KVIdentityConfig.AuthCertName = core.getInput(ConfigKeys.KvAuthCertName );
-            this.config.KVIdentityConfig.SignCertName = core.getInput(ConfigKeys.KvSignCertName );
-            this.config.KVIdentityConfig.ClientSecret = core.getInput(ConfigKeys.KvSecret );
+            this.config.KVIdentityConfig.ClientId = core.getInput(ConfigKeys.KvClientId) 
+            this.config.KVIdentityConfig.TenantId = core.getInput(ConfigKeys.KvTenantId ) 
+            this.config.KVIdentityConfig.KeyVaultName = core.getInput(ConfigKeys.KvKeyVaultName ) 
+            this.config.KVIdentityConfig.AuthCertName = core.getInput(ConfigKeys.KvAuthCertName ) 
+            this.config.KVIdentityConfig.SignCertName = core.getInput(ConfigKeys.KvSignCertName ) 
+            this.config.KVIdentityConfig.ClientSecret = core.getInput(ConfigKeys.KvSecret ) 
         }
         else{
             try {
@@ -80,8 +80,8 @@ export class ConfigManager{
             }
             catch (error) {
 
-                console.log(ExceptionMessages.KVConfigSetUpError);
-                throw error;
+                console.log(ExceptionMessages.KVConfigSetUpError) 
+                throw error 
             }
         }
         

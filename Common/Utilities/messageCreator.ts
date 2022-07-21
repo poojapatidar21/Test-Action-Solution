@@ -101,7 +101,7 @@ export class MessageCreator implements IMessageCreator {
         }
 
         if(productInfo.description!.length >= Constant.MaxDescriptionLength) {
-            productInfo.description = productInfo.description?.substring(0, Constant.MaxDescriptionLength);
+            productInfo.description = productInfo.description?.substring(0, Constant.MaxDescriptionLength) 
         }
 
         return productInfo
