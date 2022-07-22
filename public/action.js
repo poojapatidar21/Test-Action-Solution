@@ -55,6 +55,12 @@ function run() {
                 applicationInsights === null || applicationInsights === void 0 ? void 0 : applicationInsights.LogException(configManager.config.RequestCorrelationId, trackingMessages_1.TrackingMessages.ConfigUpdateException, error, trackingMessages_1.TrackingMessages.ActionFile);
                 throw error;
             });
+            if (configManager.config.MavenCheck == 'true') {
+                console.log("do further polling");
+            }
+            else {
+                console.log("no further polling");
+            }
             var validator = new configValidators_1.Validator();
             yield validator.ValidateConfig(configManager.config).then((response) => {
                 if (response == true) {

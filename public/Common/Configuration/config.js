@@ -18,6 +18,7 @@ class Config {
         this.ContentOrigin = undefined;
         this.ProductState = undefined;
         this.Audience = undefined;
+        this.MavenCheck = undefined;
         this.PackageLocation = undefined;
         this.Owners = undefined;
         this.Approvers = undefined;

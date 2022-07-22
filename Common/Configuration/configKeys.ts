@@ -11,6 +11,7 @@ export const ConfigKeys = {
     Intent: "Intent",
     ContentType: "ContentType",
     Audience: "Audience",
+    MavenCheck: "MavenCheck",
     ContentOrigin: "ContentOrigin",
     ProductState: "ProductState",
     PackageLocation: "PackageLocation",

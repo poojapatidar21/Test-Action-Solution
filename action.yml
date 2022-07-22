@@ -49,6 +49,11 @@ inputs:
     description: "This is an auto populated field based on the content Type input field."
     required: true
     default: "Workflow.A_S_AV_PackageManager"
+  MavenCheck:
+    description: "For extra polling on Maven to validate the package"
+    type: boolean
+    required: true
+    default: "false"
   
 
 runs:

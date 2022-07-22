@@ -13,6 +13,8 @@ export async function run(this: any) {
 
     try {
 
+        
+
         let appInsightsKey = Constant.AppInsightsLoggingKey 
         var applicationInsights = ApplicationInsights.CreateInstance(appInsightsKey) 
         

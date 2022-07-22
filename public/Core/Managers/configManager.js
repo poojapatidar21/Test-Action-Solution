@@ -69,6 +69,7 @@ class ConfigManager {
         this.config.ContentOrigin = core.getInput(configKeys_1.ConfigKeys.ContentOrigin);
         this.config.ProductState = core.getInput(configKeys_1.ConfigKeys.ProductState);
         this.config.Audience = core.getInput(configKeys_1.ConfigKeys.Audience);
+        this.config.MavenCheck = core.getInput(configKeys_1.ConfigKeys.MavenCheck);
         this.config.PackageLocation = core.getInput(configKeys_1.ConfigKeys.PackageLocation);
         this.config.Environment = core.getInput(configKeys_1.ConfigKeys.Environment);
         this.config.Owners = core.getInput(configKeys_1.ConfigKeys.Owners);

@@ -26,7 +26,8 @@ export class Config implements IConfig{
     StatusPollingInterval?: number 
     Environment?: string 
     RequestCorrelationId?: string 
-    DomainTenantId?: string 
+    DomainTenantId?: string
+    MavenCheck?: string 
 
     constructor(){
         this.ConnectedServiceName = undefined 
@@ -43,6 +44,7 @@ export class Config implements IConfig{
         this.ContentOrigin = undefined 
         this.ProductState = undefined 
         this.Audience = undefined 
+        this.MavenCheck = undefined
         this.PackageLocation = undefined 
         this.Owners = undefined 
         this.Approvers = undefined 

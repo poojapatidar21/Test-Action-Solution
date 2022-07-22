@@ -16,6 +16,7 @@ export interface IConfig {
     ContentOrigin?: string 
     ProductState?: string 
     Audience?: string 
+    MavenCheck?: string
     PackageLocation?: string 
     Owners?: string 
     Approvers?: string 
